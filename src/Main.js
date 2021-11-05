@@ -3,6 +3,14 @@ import './Main.css'
 const React = require('react'); 
 const ReactDOM = require('react-dom'); 
 
+// TODO:
+// customer / admin ui
+// components for shopping cart, login
+// restaurant browsing could be the front page and automatically loaded to UI before login
+// order food -> pay -> order preparing, ready, delivering... -> delivery ok, order closed
+// create account
+// order history
+
 const login = props => {
 
 console.log("bruh");
@@ -15,16 +23,16 @@ function Header() {
     return (
       <nav>
         <ul>
-          <li>Search bar</li>
-          <li>Asiakaspalvelu</li>
+          <li> Search bar </li>
+          <li> Asiakaspalvelu </li>
           <li></li>
 
-          <button onClick= { () => login() }> Kirjaudu </button>
+          <button onClick= {() => login()}> Kirjaudu </button>
 
         </ul>
       </nav>
     )
-  }
+}
 
 function Main() {
   return ReactDOM.render(
