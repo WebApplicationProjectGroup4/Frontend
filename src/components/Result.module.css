@@ -1,0 +1,31 @@
+.name
+{
+  font-weight: 700;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  font-size: 18px;
+}
+.restaurant
+{
+  width: 33.33%;
+  padding: 10px;
+  margin-bottom: 50px;
+  transition: transform 0.5s;
+  text-align: center;
+  border: #666666 ;
+  border-style: solid;
+  border-radius: 4px;
+  max-width: 300px;
+  max-height: 300px;
+  min-width: 200px;
+  min-height: 200px;
+}
+.restaurant:hover{
+  transform: translateY(-2px);
+}
+.picture{
+  text-align: center;
+}
+.box{
+  display: wrap;
+}

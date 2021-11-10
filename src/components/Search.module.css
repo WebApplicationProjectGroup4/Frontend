@@ -1,0 +1,12 @@
+.presentationModeGrid
+{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+}
+.locked{
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}

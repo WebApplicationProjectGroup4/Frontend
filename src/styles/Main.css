@@ -1,7 +1,8 @@
 nav {
-    flex: 1;
+    flex: 0 auto;
     text-align: center;
     Background-Color: rgb(31, 31, 31);
+    margin-bottom: 20px;
 }
 
 nav ul {
@@ -15,13 +16,37 @@ nav ul li {
     list-style-type: none;
     color: white;
     font-size: 20px;
+    cursor: pointer;
 }
 
 body {
     background-color: #a9af9f;
     margin: 0px;
+
+    min-height: 100vh;
+    display:flex;
+    flex-direction: column;
 }
 
-button {
+.loginButton {
     size: 150;
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.searchBar{
+    height: 25px;
+    width: 200px;
+    margin-right: 50px;
+    border-radius: 4px;
+    border: none;
+}
+footer{
+    margin-top: auto;
 }

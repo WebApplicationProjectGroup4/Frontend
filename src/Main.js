@@ -1,4 +1,9 @@
 import './styles/Main.css'
+import Footer from './components/Footer.js';
+import Search from './components/Search';
+import data from './data.json'
+import react from 'react';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 const React = require('react'); 
 const ReactDOM = require('react-dom'); 
@@ -52,27 +57,43 @@ console.log("test");
 // we could add an admin entry to user table in mysql
 // if admin == true launch admin UI else customer UI (default)
 }
+class App extends React.Component {
+  constructor(props)
+  {
+    super(props);
+    this.state = {
+      items: data.restaurants,
+      SearchString: ""
+    }
+  }
 
-function Header() {
+  onChange = (event) => {
+    this.setState({SearchString: event.target.value});
+  }
+ 
+  render()
+  {
     return (
+      <BrowserRouter>
+      <body>
       <nav>
-        <ul>
-          <li> Search bar </li>
-          <li> Asiakaspalvelu </li>
-          <li></li>
-
-          <button onClick= {() => login()}> Kirjaudu </button>
-
-        </ul>
-      </nav>
+         <ul>
+           <Link to="/"><li>Home</li></Link>
+           <li> <input class="searchBar" type="text" onChange={this.onChange} value={this.state.SearchString} /> </li>
+           <li> Asiakaspalvelu </li>
+           <li></li>
+           <button class="loginButton" onClick= {() => login()}> Kirjaudu </button>
+         </ul>
+       </nav>
+      <Routes>
+        <Route path="/" element={ <Search items={this.state.items.filter((item) => item.name.includes(this.state.SearchString))} /> }/>
+      </Routes>
+      <Footer />
+      </body>
+      </BrowserRouter>
     )
+  }
 }
 
-function Main() {
-  return ReactDOM.render(
-	<Header />,
-	document.getElementById('root')
-  )
-}
 
-export default Main;
+export default App;
