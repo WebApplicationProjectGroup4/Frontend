@@ -1,12 +1,30 @@
-.presentationModeGrid
-{
+.container{
+  max-width: 1000px;
+  margin: auto;
+  padding-left: 25px;
+  padding-right: 25px;
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-around;
 }
-.locked{
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+.prices{
+  width: 15%;
+  align-items: center;
+  text-align: center;
+  display: flex;
+  border-bottom: 1px solid lightgrey;
+}
+.product{
+  width: 45%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: left;
+  padding: 10px 0;
+  border-bottom: 1px solid lightgrey;
+}
+.cartbutton{
+  border-bottom: 1px solid lightgrey;
+}
+.title{
+  text-align: center;
+  font-size: 36px;
 }

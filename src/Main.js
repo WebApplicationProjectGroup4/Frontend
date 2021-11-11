@@ -1,12 +1,16 @@
 import './styles/Main.css'
 import Footer from './components/Footer.js';
-import Search from './components/Search';
-import data from './data.json'
+import data from './components/data.json';
+import ProductDetail from './components/RestaurantMenu.js';
 import react from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
+import ShopList from './components/ShopList.js';
+import Menu from './components/RestaurantMenu.js'
 
 const React = require('react'); 
 const ReactDOM = require('react-dom'); 
+
 
 // TODO:
 // customer / admin ui
@@ -57,6 +61,7 @@ console.log("test");
 // we could add an admin entry to user table in mysql
 // if admin == true launch admin UI else customer UI (default)
 }
+/*
 class App extends React.Component {
   constructor(props)
   {
@@ -70,12 +75,13 @@ class App extends React.Component {
   onChange = (event) => {
     this.setState({SearchString: event.target.value});
   }
- 
+  
   render()
   {
     return (
-      <BrowserRouter>
+      
       <body>
+        <BrowserRouter>
       <nav>
          <ul>
            <Link to="/"><li>Home</li></Link>
@@ -83,17 +89,46 @@ class App extends React.Component {
            <li> Asiakaspalvelu </li>
            <li></li>
            <button class="loginButton" onClick= {() => login()}> Kirjaudu </button>
-         </ul>
-       </nav>
+        </ul>
+      </nav>
       <Routes>
-        <Route path="/" element={ <Search items={this.state.items.filter((item) => item.name.includes(this.state.SearchString))} /> }/>
+          <Route path="/" element={ <Search items={this.state.items.filter((item) => item.name.includes(this.state.SearchString))} /> }>
+            <Route path={data.restaurants.id} element={ <ProductDetail />   }/>
+          </Route>
       </Routes>
       <Footer />
-      </body>
       </BrowserRouter>
+      </body>
     )
   }
 }
+*/
 
+function Prototype() {
 
-export default App;
+  const restaurants = data.map(restaurant => {
+    return { ...restaurant, id: uuidv4() }
+  })
+  return (
+    <body>
+    <BrowserRouter>
+      <nav>
+         <ul>
+           <Link to="/"><li>Home</li></Link>
+           <li> <input class="searchBar" /> </li>
+           <li> Asiakaspalvelu </li>
+           <li></li>
+           <button class="loginButton" onClick= {() => login()}> Kirjaudu </button>
+        </ul>
+      </nav>
+        <Routes>
+          <Route path="/" element={ <ShopList restaurants={ restaurants }/> } />
+          <Route path="/:contactId" element={ <Menu restaurants={ restaurants } /> } />
+        </Routes>
+        <Footer />
+    </BrowserRouter>
+    </body>
+  );
+}
+
+export default Prototype;

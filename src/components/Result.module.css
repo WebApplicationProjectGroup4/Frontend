@@ -9,7 +9,7 @@
 {
   width: 33.33%;
   padding: 10px;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   transition: transform 0.5s;
   text-align: center;
   border: #666666 ;
@@ -17,8 +17,8 @@
   border-radius: 4px;
   max-width: 300px;
   max-height: 300px;
-  min-width: 200px;
-  min-height: 200px;
+  min-width: 280px;
+  min-height: 280px;
 }
 .restaurant:hover{
   transform: translateY(-2px);
@@ -28,4 +28,16 @@
 }
 .box{
   display: wrap;
+}
+.presentationModeGrid
+{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+}
+.locked{
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }

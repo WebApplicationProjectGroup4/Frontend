@@ -1,0 +1,72 @@
+[
+    {
+      "name": "Restaurant1",
+      "rating": 4.5,
+      "image": "Ravintola.JPG",
+      "food1": "Rachel Khoo's Red Wine Chicken roast",
+      "food1Price": "10$",
+      "food2": "Mussels in white wine sauce with cheese",
+      "food2Price": "21$",
+      "food3": "Hotdog",
+      "food3Price": "5$",
+      "food4": "Protobello Swiss Burger",
+      "food4Price": "12,95$"
+    },
+    {
+      "name": "Restaurant2",
+      "rating": 4.5,
+      "image": "Ravintola.jpg",
+      "food1": "Mussels in white wine sauce with cheese",
+      "food1Price": "10$"
+      
+    },
+    {
+      "name": "Restaurant3",
+      "rating": 5,
+      "image": "Ravintola.jpg",
+      "food1": "test",
+      "food1Price": "10$"
+    },
+    {
+      "name": "Restaurant4",
+      "rating": 0,
+      "image": "Ravintola.jpg",
+      "food1": "test",
+      "food1Price": "10$"
+    },
+    {
+      "name": "Restaurant5",
+      "rating": 5,
+      "image": "Ravintola.jpg",
+      "food1": "test",
+      "food1Price": "10$"
+    },
+    {
+      "name": "Restaurant6",
+      "rating": 0,
+      "image": "Ravintola.jpg",
+      "food1": "test",
+      "food1Price": "10$"
+    },
+    {
+      "name": "Restaurant7",
+      "rating": 4,
+      "image": "Ravintola.jpg",
+      "food1": "test",
+      "food1Price": "10$"
+    },
+    {
+      "name": "Restaurant8",
+      "rating": 4.3,
+      "image": "Ravintola.jpg",
+      "food1": "test",
+      "food1Price": "10$"
+    },
+    {
+      "name": "Restaurant9",
+      "rating": 5,
+      "image": "Ravintola.jpg",
+      "food1": "test",
+      "food1Price": "10$"
+    }
+  ]
