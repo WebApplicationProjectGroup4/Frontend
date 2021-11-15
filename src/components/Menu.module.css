@@ -4,6 +4,8 @@
   padding-left: 25px;
   padding-right: 25px;
   display: flex;
+  background-color: whitesmoke;
+  padding-bottom: 10px;
 }
 .prices{
   width: 15%;
@@ -23,8 +25,14 @@
 }
 .cartbutton{
   border-bottom: 1px solid lightgrey;
+  font-size: 25px;
 }
 .title{
   text-align: center;
   font-size: 36px;
+  background-color: whitesmoke;
+  max-width: 1000px;
+  margin: auto;
+  padding-left: 25px;
+  padding-right: 25px;
 }

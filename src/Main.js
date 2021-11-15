@@ -62,6 +62,11 @@ console.log("test");
 // if admin == true launch admin UI else customer UI (default)
 }
 /*
+
+const restaurants = data.map(restaurant => {
+    return { ...restaurant, id: uuidv4() }
+  })
+
 class App extends React.Component {
   constructor(props)
   {
@@ -70,6 +75,10 @@ class App extends React.Component {
       items: data.restaurants,
       SearchString: ""
     }
+  }
+
+  static get restaurants(){
+    return {...restaurant, id: uuidv4()}
   }
 
   onChange = (event) => {

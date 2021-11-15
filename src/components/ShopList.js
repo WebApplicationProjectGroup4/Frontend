@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from './Result.module.css';
 
-export default function ContactList(props) {
+export default function restaurant(props) {
   return (
     <div className={styles.locked}>
       <div className={ styles.presentationModeGrid }>
