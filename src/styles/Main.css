@@ -20,7 +20,9 @@ nav ul li {
 }
 
 body {
-    background-color: #a9af9f;
+    background: rgb(0,251,234);
+    background: linear-gradient(90deg, rgba(0,251,234,1) 0%, rgba(99,183,255,1) 30%, rgba(99,183,255,1) 70%, rgba(75,224,255,1) 100%);
+
     margin: 0px;
 
     min-height: 100vh;
@@ -32,7 +34,7 @@ body {
     size: 150;
     background-color: #4CAF50; /* Green */
     border: none;
-    color: white;
+    color: whitesmoke;
     padding: 10px 20px;
     text-align: center;
     display: inline-block;

@@ -1,12 +1,12 @@
 import './styles/Main.css'
 import Footer from './components/Footer.js';
 import data from './components/data.json';
-import ProductDetail from './components/RestaurantMenu.js';
 import react from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import ShopList from './components/ShopList.js';
-import Menu from './components/RestaurantMenu.js'
+import Menu from './components/RestaurantMenu.js';
+import {useState} from "react";
 
 const React = require('react'); 
 const ReactDOM = require('react-dom'); 
@@ -61,24 +61,16 @@ console.log("test");
 // we could add an admin entry to user table in mysql
 // if admin == true launch admin UI else customer UI (default)
 }
+
 /*
-
-const restaurants = data.map(restaurant => {
-    return { ...restaurant, id: uuidv4() }
-  })
-
 class App extends React.Component {
   constructor(props)
   {
     super(props);
     this.state = {
-      items: data.restaurants,
+      items: data,
       SearchString: ""
     }
-  }
-
-  static get restaurants(){
-    return {...restaurant, id: uuidv4()}
   }
 
   onChange = (event) => {
@@ -101,8 +93,8 @@ class App extends React.Component {
         </ul>
       </nav>
       <Routes>
-          <Route path="/" element={ <Search items={this.state.items.filter((item) => item.name.includes(this.state.SearchString))} /> }>
-            <Route path={data.restaurants.id} element={ <ProductDetail />   }/>
+          <Route path="/" element={ <ShopList items={this.state.items.filter((item) => item.name.includes(this.state.SearchString))} /> }>
+            <Route path={data.id} element={ <Menu />   }/>
           </Route>
       </Routes>
       <Footer />
@@ -123,8 +115,8 @@ function Prototype() {
     <BrowserRouter>
       <nav>
          <ul>
-           <Link to="/"><li>Home</li></Link>
-           <li> <input class="searchBar" /> </li>
+           <Link to="/" ><li>Home</li></Link>
+           <li> <input class="searchBar" type="text" placeholder="Implementing soon..." /> </li>
            <li> Asiakaspalvelu </li>
            <li></li>
            <button class="loginButton" onClick= {() => login()}> Kirjaudu </button>

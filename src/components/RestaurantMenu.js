@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom';
 import styles from './Menu.module.css'
 
-/*
+
 export default function Restaurants(props) {
 
   const result = useParams();
@@ -26,16 +26,21 @@ export default function Restaurants(props) {
 }
 
 
-*/
+/*
 
 export default function restaurant(props) {
   return (
     <div>
+    <div className={styles.title}>Menu</div>
+    <div>
       { props.restaurants.map(restaurants =>
-      <div>
-          <div className={styles.name}>{restaurants.name}</div>
+      <div className={styles.container}>
+          <div className={styles.name}>{restaurants.foods}</div>
           </div>
       )}
-      </div>
+    </div>
+    </div>
   )
 }
+
+*/

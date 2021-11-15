@@ -3,21 +3,8 @@
       "name": "Restaurant1",
       "rating": 4.5,
       "image": "Ravintola.JPG",
-      "foods": [
-        {
-          "name": "Mussels in white wine sauce with cheese",
-          "price": 20
-        },
-        {
-          "name": "Mussels in white wine sauce with cheese",
-          "price": 39
-        },
-        {
-          "name": "Mussels in white wine sauce with cheese",
-          "price": 10
-        }
-      ],
-      "food1": "test",
+      "foods": ["Mussels in white wine sauce with cheese", "test" ],
+      "food1": "Mussels in white wine sauce with cheese", 
       "food1Price": "10$"
     },
     {
@@ -64,6 +51,7 @@
       "food1Price": "10$"
     },
     {
+
       "name": "Restaurant8",
       "rating": 4.3,
       "image": "Ravintola.jpg",

@@ -19,6 +19,7 @@
   max-height: 300px;
   min-width: 280px;
   min-height: 280px;
+  color: black;
 }
 .restaurant:hover{
   transform: translateY(-2px);
@@ -35,9 +36,13 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
+  text-decoration: none;
 }
 .locked{
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
+  background-color: white;
+  margin-top: -20px;
+  padding-top: 10px;
 }
