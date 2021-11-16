@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import "./Login.css";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
 
@@ -13,19 +13,22 @@ export default function Login() {
 
   return (
     <div className="Login">
-        <Form>
+        <Form onSubmit={handleSubmit}> 
         <Form.Label>Username</Form.Label>
           <Form.Control
             autoFocus
-            type="email"
-            value={email}
+            type="username"
+            value={username}
+            onChange={(event) => setUsername(e.target.value)}
           />
+          
         </Form>
         <Form>
         <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
             value={password}
+            onChagne={(event) => setPassword(e.target.value)}
           />
           </Form>
     </div>
