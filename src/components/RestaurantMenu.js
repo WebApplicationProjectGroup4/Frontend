@@ -6,8 +6,8 @@ import styles from './Menu.module.css'
 export default function Restaurants(props) {
 
   const result = useParams();
-
-  const restaurant = props.restaurants.find(restaurants => restaurants.id === result.contactId);
+  
+  const restaurant = props.restaurants.find(restaurants => restaurants.id === result.restaurantId);
   if(restaurant == null) {
     return <div className={styles.container}>No matching restaurant found.</div>
   }

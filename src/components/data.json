@@ -64,5 +64,85 @@
       "image": "Ravintola.jpg",
       "food1": "test",
       "food1Price": "10$"
+    },
+    {
+      "name": "Restaurant10",
+      "rating": 4.5,
+      "image": "Ravintola.jpg",
+      "food1": "Mussels in white wine sauce with cheese",
+      "food1Price": "10$"
+      
+    },
+    {
+      "name": "Restaurant11",
+      "rating": 5,
+      "image": "Ravintola.jpg",
+      "food1": "test",
+      "food1Price": "10$"
+    },
+    {
+      "name": "Restaurant12",
+      "rating": 0,
+      "image": "Ravintola.jpg",
+      "food1": "test",
+      "food1Price": "10$"
+    },
+    {
+      "name": "Restaurant13",
+      "rating": 5,
+      "image": "Ravintola.jpg",
+      "food1": "test",
+      "food1Price": "10$"
+    },
+    {
+      "name": "Restaurant14",
+      "rating": 0,
+      "image": "Ravintola.jpg",
+      "food1": "test",
+      "food1Price": "10$"
+    },
+    {
+      "name": "Restaurant15",
+      "rating": 4,
+      "image": "Ravintola.jpg",
+      "food1": "test",
+      "food1Price": "10$"
+    },
+    {
+
+      "name": "Restaurant16",
+      "rating": 4.3,
+      "image": "Ravintola.jpg",
+      "food1": "test",
+      "food1Price": "10$"
+    },
+    {
+      "name": "Restaurant17",
+      "rating": 5,
+      "image": "Ravintola.jpg",
+      "food1": "test",
+      "food1Price": "10$"
+    },
+    {
+      "name": "Restaurant18",
+      "rating": 5,
+      "image": "Ravintola.jpg",
+      "food1": "test",
+      "food1Price": "10$"
+    },
+    {
+      "name": "Restaurant19",
+      "rating": 5,
+      "image": "Ravintola.jpg",
+      "food1": "test",
+      "food1Price": "10$"
+    }
+    ,
+    {
+      "name": "Restaurant20",
+      "rating": 5,
+      "image": "Ravintola.jpg",
+      "food1": "test",
+      "food1Price": "10$"
     }
   ]

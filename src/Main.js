@@ -1,14 +1,13 @@
 import './styles/Main.css'
 import Footer from './components/Footer.js';
 import data from './components/data.json';
-import react from 'react';
+import React, {useState} from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import ShopList from './components/ShopList.js';
 import Menu from './components/RestaurantMenu.js';
-import {useState} from "react";
 
-const React = require('react'); 
+//const React = require('react'); 
 const ReactDOM = require('react-dom'); 
 
 
@@ -107,6 +106,7 @@ class App extends React.Component {
 
 function Prototype() {
 
+// using uuidv4 to make id:s
   const restaurants = data.map(restaurant => {
     return { ...restaurant, id: uuidv4() }
   })
@@ -123,8 +123,9 @@ function Prototype() {
         </ul>
       </nav>
         <Routes>
-          <Route path="/" element={ <ShopList restaurants={ restaurants }/> } />
-          <Route path="/:contactId" element={ <Menu restaurants={ restaurants } /> } />
+          {/* Depending on route render x  */}
+          <Route path="/:restaurantId" element={ <Menu restaurants={ restaurants } /> } />
+          <Route path="/" element={ <ShopList restaurants ={ restaurants }/>} />
         </Routes>
         <Footer />
     </BrowserRouter>
@@ -133,3 +134,20 @@ function Prototype() {
 }
 
 export default Prototype;
+
+/*
+
+const [searchTerm,setSearchTerm] = useState('')
+
+<input type="text" placeholder="seach..." onChange={e=>setSearchTerm(e.target.value)} />
+{data.filter((val)=>{
+    if(searchTerm == ""){
+      return val
+    }
+    else if(val.name.toLowerCase().includes(searchTerm.toLowerCase())){
+      return val;
+    }
+  }).map((val)=>{
+    return <div>{val.name} </div>
+  })}
+ */
