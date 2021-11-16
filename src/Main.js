@@ -1,15 +1,15 @@
 import './styles/Main.css'
 import Footer from './components/Footer.js';
 import data from './components/data.json';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import ShopList from './components/ShopList.js';
 import Menu from './components/RestaurantMenu.js';
-
+import Login from './components/Login.js';
 //const React = require('react'); 
 const ReactDOM = require('react-dom'); 
-
+const axios = require('axios').default;
 
 // TODO:
 // customer / admin ui
@@ -61,48 +61,33 @@ console.log("test");
 // if admin == true launch admin UI else customer UI (default)
 }
 
-/*
-class App extends React.Component {
-  constructor(props)
-  {
-    super(props);
-    this.state = {
-      items: data,
-      SearchString: ""
-    }
-  }
+function App() {
 
-  onChange = (event) => {
-    this.setState({SearchString: event.target.value});
-  }
-  
-  render()
-  {
-    return (
-      
-      <body>
-        <BrowserRouter>
-      <nav>
-         <ul>
-           <Link to="/"><li>Home</li></Link>
-           <li> <input class="searchBar" type="text" onChange={this.onChange} value={this.state.SearchString} /> </li>
-           <li> Asiakaspalvelu </li>
-           <li></li>
-           <button class="loginButton" onClick= {() => login()}> Kirjaudu </button>
-        </ul>
-      </nav>
-      <Routes>
-          <Route path="/" element={ <ShopList items={this.state.items.filter((item) => item.name.includes(this.state.SearchString))} /> }>
-            <Route path={data.id} element={ <Menu />   }/>
-          </Route>
-      </Routes>
-      <Footer />
-      </BrowserRouter>
-      </body>
-    )
+  // get
+  axios.get('/customers')
+    .then(function (response) {
+      // handle success
+      console.log(response);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .then(function () {
+      // always executed
+    });
+
+    return null;
+}
+
+function Restaurants() {
+  //Get data from the api
+  const [restaurants, getRestaurants] = useState('');
+  const url = 'http://localhost:3001/'
+  const getAllRestaurants = () => {
+    axios.get(`${url}restaurants`)
   }
 }
-*/
 
 function Prototype() {
 
@@ -110,22 +95,26 @@ function Prototype() {
   const restaurants = data.map(restaurant => {
     return { ...restaurant, id: uuidv4() }
   })
+
   return (
     <body>
+    
     <BrowserRouter>
+    <App />
       <nav>
          <ul>
            <Link to="/" ><li>Home</li></Link>
            <li> <input class="searchBar" type="text" placeholder="Implementing soon..." /> </li>
            <li> Asiakaspalvelu </li>
            <li></li>
-           <button class="loginButton" onClick= {() => login()}> Kirjaudu </button>
+           <Link to="/login" ><button class="loginButton" onClick= {() => login()}> Kirjaudu </button></Link>
         </ul>
       </nav>
         <Routes>
           {/* Depending on route, renders that component */}
           <Route path="/:restaurantId" element={ <Menu restaurants={ restaurants } /> } />
           <Route path="/" element={ <ShopList restaurants ={ restaurants }/>} />
+          <Route path="/login" element={ <Login />} />
         </Routes>
         <Footer />
     </BrowserRouter>
@@ -134,20 +123,3 @@ function Prototype() {
 }
 
 export default Prototype;
-
-/*
-
-const [searchTerm,setSearchTerm] = useState('')
-
-<input type="text" placeholder="seach..." onChange={e=>setSearchTerm(e.target.value)} />
-{data.filter((val)=>{
-    if(searchTerm == ""){
-      return val
-    }
-    else if(val.name.toLowerCase().includes(searchTerm.toLowerCase())){
-      return val;
-    }
-  }).map((val)=>{
-    return <div>{val.name} </div>
-  })}
- */
