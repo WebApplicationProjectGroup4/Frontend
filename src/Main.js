@@ -123,7 +123,7 @@ function Prototype() {
         </ul>
       </nav>
         <Routes>
-          {/* Depending on route render x  */}
+          {/* Depending on route, renders that component */}
           <Route path="/:restaurantId" element={ <Menu restaurants={ restaurants } /> } />
           <Route path="/" element={ <ShopList restaurants ={ restaurants }/>} />
         </Routes>
