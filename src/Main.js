@@ -48,9 +48,26 @@ const adminUI = props => {
   // create restaurant etc
 }
 
-const login = props => {
+function login() {
 
-console.log("test");
+  var user = "user";
+  var pw = "password";
+
+  console.log("onclick login event");
+
+    // get
+    axios.get('/customers')
+    .then(function (response) {
+      // handle success
+      pwCheck(response, user, pw);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .then(function (response) {
+      // always executed
+    });
 
 // this could render a username + pw window/element
 // save it to local variables, pass to database
@@ -61,23 +78,35 @@ console.log("test");
 // if admin == true launch admin UI else customer UI (default)
 }
 
-function App() {
+function pwCheck(response, user, pw) {
 
-  // get
-  axios.get('/customers')
-    .then(function (response) {
-      // handle success
-      console.log(response);
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    })
-    .then(function () {
-      // always executed
-    });
+  var localUserVar = user;
+  var localPWVar = pw;
 
-    return null;
+  // console.log(localUserVar, localPWVar);
+
+  console.log("axios GET success -> pwCheck function");
+
+  console.log(response.data[0]);
+  console.log(response);
+  console.log(response.data);
+
+  // response is returned as an object array
+  // response contains cfg file, data(from db), headers & requests
+  // response.data = array of objects returned from db
+  // response.data[0] = first returned object
+  // in this case [0] is the first customer, because we are
+  // requesting customer entries from customer table
+
+  
+
+  for (var i = 0; i < response.data; i++) {
+
+
+    // if response.data[i].contains localUserVar, localPWVar,
+    // login is successful
+
+  }
 }
 
 function Restaurants() {
@@ -100,7 +129,6 @@ function Prototype() {
     <body>
     
     <BrowserRouter>
-    <App />
       <nav>
          <ul>
            <Link to="/" ><li>Home</li></Link>
