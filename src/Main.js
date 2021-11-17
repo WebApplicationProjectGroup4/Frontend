@@ -50,8 +50,8 @@ const adminUI = props => {
 
 function login() {
 
-  var user = "user";
-  var pw = "password";
+  var user = "Test Customer 2";
+  var pw = "Password2";
 
   console.log("onclick login event");
 
@@ -80,32 +80,35 @@ function login() {
 
 function pwCheck(response, user, pw) {
 
-  var localUserVar = user;
-  var localPWVar = pw;
-
-  // console.log(localUserVar, localPWVar);
+  var localUser = user;
+  var localPW = pw;
+  var res = response; // easier to read
 
   console.log("axios GET success -> pwCheck function");
 
-  console.log(response.data[0]);
-  console.log(response);
-  console.log(response.data);
+  console.log(res.data); // debug
 
-  // response is returned as an object array
-  // response contains cfg file, data(from db), headers & requests
-  // response.data = array of objects returned from db
-  // response.data[0] = first returned object
+  // res is returned from db as an object array
+  // res contains a cfg file, data(db entries), headers & requests
+  // res.data = array of objects/entries returned from db
+  // res.data[0] = first returned entry
   // in this case [0] is the first customer, because we are
   // requesting customer entries from customer table
 
-  
-
-  for (var i = 0; i < response.data; i++) {
 
 
-    // if response.data[i].contains localUserVar, localPWVar,
-    // login is successful
+  for (var i = 0; i < res.data.length; i++) {
+    // while i < returned users from db -> loop
 
+    // if the array index i is currently in, contains the same username & password
+    // as our local variables, login is successful. there's an ugly debug of what has happened
+
+    if (res.data[i].Name === localUser && res.data[i].Password === localPW ) {
+      console.log("local user/pw ", localUser, ";", localPW, " matches db user/pw ", res.data[i].Name, ";",
+      res.data[i].Password, " on index response[", i, "]; and database idCustomer index", res.data[i].idCustomer);
+
+      console.log("login successful");
+    }
   }
 }
 
