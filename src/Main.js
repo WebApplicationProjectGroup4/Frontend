@@ -56,7 +56,7 @@ function login() {
   console.log("onclick login event");
 
     // get
-    axios.get('/customers')
+    axios.get('/users')
     .then(function (response) {
       // handle success
       pwCheck(response, user, pw);
@@ -105,7 +105,7 @@ function pwCheck(response, user, pw) {
 
     if (res.data[i].Name === localUser && res.data[i].Password === localPW ) {
       console.log("local user/pw ", localUser, ";", localPW, " matches db user/pw ", res.data[i].Name, ";",
-      res.data[i].Password, " on index response[", i, "]; and database idCustomer index", res.data[i].idCustomer);
+      res.data[i].Password, " on index response[", i, "]; and database idCustomer index", res.data[i].idUsers);
 
       console.log("login successful");
     }
@@ -136,9 +136,9 @@ function Prototype() {
          <ul>
            <Link to="/" ><li>Home</li></Link>
            <li> <input class="searchBar" type="text" placeholder="Implementing soon..." /> </li>
-           <li> Asiakaspalvelu </li>
+           <li> Help </li>
            <li></li>
-           <Link to="/login" ><button class="loginButton" onClick= {() => login()}> Kirjaudu </button></Link>
+           <Link to="/login" ><button class="loginButton" onClick= {() => login()}> Login </button></Link>
         </ul>
       </nav>
         <Routes>
