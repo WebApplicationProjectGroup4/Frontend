@@ -12,7 +12,7 @@ const ReactDOM = require('react-dom');
 const axios = require('axios').default;
 
 // TODO:
-// customer / admin ui
+// customer(user) / admin ui
 // components for shopping cart, login
 // restaurant browsing could be the front page and automatically loaded to UI before login
 // order food -> pay -> order preparing, ready, delivering... -> delivery ok, order closed
@@ -48,69 +48,6 @@ const adminUI = props => {
   // create restaurant etc
 }
 
-function login() {
-
-  var user = "Test Customer 2";
-  var pw = "Password2";
-
-  console.log("onclick login event");
-
-    // get
-    axios.get('/customers')
-    .then(function (response) {
-      // handle success
-      pwCheck(response, user, pw);
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    })
-    .then(function (response) {
-      // always executed
-    });
-
-// this could render a username + pw window/element
-// save it to local variables, pass to database
-// compare returned username + pw from database to local variables
-
-// admin check in here or in mysql
-// we could add an admin entry to user table in mysql
-// if admin == true launch admin UI else customer UI (default)
-}
-
-function pwCheck(response, user, pw) {
-
-  var localUser = user;
-  var localPW = pw;
-  var res = response; // easier to read
-
-  console.log("axios GET success -> pwCheck function");
-
-  console.log(res.data); // debug
-
-  // res is returned from db as an object array
-  // res contains a cfg file, data(db entries), headers & requests
-  // res.data = array of objects/entries returned from db
-  // res.data[0] = first returned entry
-  // in this case [0] is the first customer, because we are
-  // requesting customer entries from customer table
-
-
-
-  for (var i = 0; i < res.data.length; i++) {
-    // while i < returned users from db -> loop
-
-    // if the array index i is currently in, contains the same username & password
-    // as our local variables, login is successful. there's an ugly debug of what has happened
-
-    if (res.data[i].Name === localUser && res.data[i].Password === localPW ) {
-      console.log("local user/pw ", localUser, ";", localPW, " matches db user/pw ", res.data[i].Name, ";",
-      res.data[i].Password, " on index response[", i, "]; and database idCustomer index", res.data[i].idCustomer);
-
-      console.log("login successful");
-    }
-  }
-}
 
 function Restaurants() {
   //Get data from the api
@@ -138,7 +75,7 @@ function Prototype() {
            <li> <input class="searchBar" type="text" placeholder="Implementing soon..." /> </li>
            <li> Asiakaspalvelu </li>
            <li></li>
-           <Link to="/login" ><button class="loginButton" onClick= {() => login()}> Kirjaudu </button></Link>
+           <Link to="/login" ><button class="loginButton"> Kirjaudu </button></Link>
         </ul>
       </nav>
         <Routes>
