@@ -11,6 +11,7 @@ import Login from './components/Login.js';
 const ReactDOM = require('react-dom'); 
 const axios = require('axios').default;
 
+
 // TODO:
 // customer(user) / admin ui
 // components for shopping cart, login
@@ -73,7 +74,7 @@ function Prototype() {
          <ul>
            <Link to="/" ><li>Home</li></Link>
            <li> <input class="searchBar" type="text" placeholder="Implementing soon..." /> </li>
-           <li> Asiakaspalvelu </li>
+           <li> Help </li>
            <li></li>
            <Link to="/login" ><button class="loginButton"> Kirjaudu </button></Link>
         </ul>

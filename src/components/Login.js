@@ -1,37 +1,41 @@
 import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Form";
 import "./Login.css";
-
 const axios = require('axios').default;
 
+function Login(props) {
+  //Const for users that saves the input
+  const username = UserInput('');
+  const password = UserInput('');
+ 
+  // test to check the value
+  const handleLogin = () => {
+    console.log(username, " handleLogin username");
+    console.log(password, " handleLogin password");
+    login(username.value, password.value);
+  }
 
-
-export default function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
-  function loginButton(username, password) {
+  function login(username, password) {
 
     var un = username;
     var pw = password;
-  
-    validateForm();
-    console.log(un, pw, " onclick login event");
-  
-      // get
-      axios.get('/users')
-      .then(function (response) {
-        // handle success
-        pwCheck(response, un, pw);
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      })
-      .then(function (response) {
-        // always executed
-      });
+
+    console.log(un, pw, " handleLogin -> login event");
+
+    // get
+    axios.get('/users')
+    .then(function (response) {
+      // handle success
+      pwCheck(response, un, pw);
+    })
+
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+
+    .then(function (response) {
+      // always executed
+    });
   }
 
   function pwCheck(response, un, pw) {
@@ -67,39 +71,35 @@ export default function Login() {
       }
     }
   }
-
-  function handleSubmit(event) {
-    event.preventDefault();
-  }
-
-  function validateForm() {
-    console.log(username, password, " validateForm");
-    return username.length > 0 && password.length > 0;
-  }
-
+ 
   return (
     <div className="Login">
-        <Form onSubmit={handleSubmit}> 
-            <Form.Group controlId="username">
-                <Form.Label>Username</Form.Label>
-                <Form.Control
-                autoFocus
-                type="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-            />
-            </Form.Group>
-            <Form.Group controlId="password">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-            </Form.Group>
-            {/*<Button block size="lg" type="submit" disabled={!validateForm()}> Login </Button>*/}
-            <button type="submit" onClick= {() => loginButton(username, password)}> Kirjaudu </button>
-          </Form>
+      <div className="Title">Login Page </div>
+      <div className="Details">
+        Username<br />
+        <input type="text" {...username} />
+      </div>
+      <div className="Details">
+        <div>Password</div>
+        <input type="password" {...password} />
+      </div>
+      <input className="Button" type="button" value={'Login'} onClick={handleLogin}/><br />
     </div>
   );
 }
+ 
+const UserInput = initialValue => {
+  //
+  const [value, setValue] = useState(initialValue);
+  // Sets the value of what was written
+  const handleChange = e => {
+    setValue(e.target.value);
+  }
+  return {
+    //returns the value
+    value,
+    onChange: handleChange,
+  }
+}
+ 
+export default Login;
