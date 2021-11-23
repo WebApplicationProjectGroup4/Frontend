@@ -52,12 +52,31 @@ const adminUI = props => {
 
 function Restaurants() {
   //Get data from the api
-  const [restaurants, getRestaurants] = useState('');
-  const url = 'http://localhost:3001/'
-  const getAllRestaurants = () => {
-    axios.get(`${url}restaurants`)
-  }
+
+  axios.get('/restaurants')
+
+  .then(function (response) {
+    // handle success
+    console.log(response.data);
+  })
+
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+
+  .then(function (response) {
+    // always executed
+  });
 }
+
+  /*const [restaurants, getRestaurants] = useState('');
+  //const url = 'http://localhost:3001/'
+  getAllRestaurants();
+  const getAllRestaurants = () => {
+    axios.get('/restaurants');
+  }
+}*/
 
 function Prototype() {
 
@@ -68,7 +87,6 @@ function Prototype() {
 
   return (
     <body>
-    
     <BrowserRouter>
       <nav>
          <ul>
@@ -76,7 +94,7 @@ function Prototype() {
            <li> <input class="searchBar" type="text" placeholder="Implementing soon..." /> </li>
            <li> Help </li>
            <li></li>
-           <Link to="/login" ><button class="loginButton"> Kirjaudu </button></Link>
+           <Link to="/login" ><button class="loginButton" onClick={Restaurants}> Kirjaudu </button></Link>
         </ul>
       </nav>
         <Routes>
