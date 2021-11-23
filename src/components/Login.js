@@ -14,6 +14,18 @@ function Login(props) {
 
   function login(username, password) {
 
+  /*axios.post('/orderhistory', { //Order history post ready, button missing
+      price: 5,
+      idUser: 1,
+      idRestaurant: 1
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log("An error has occurred while trying to post order history.", error);
+    });*/
+
     var un = username;
     var pw = password;
 
