@@ -1,8 +1,10 @@
 [
     {
-      "name": "Restaurant1",
-      "rating": 4.5,
-      "image": "Ravintola.JPG",
+      "name": "Hesburger",
+      "rating": 4,
+      "image": "hesburger.jpg",
+      "address":"Kauha katu 5",
+      "operatingHours":"11-19",
       "foods": [
         {
           "name": "Mussels in white wine sauce with cheese",
@@ -12,37 +14,74 @@
           "name": "Cheese soup",
           "price": "5$"
         }
-      ],
-      "food1": "Mussels in white wine sauce with cheese", 
-      "food1Price": "10$"
+      ]
     },
     {
-      "name": "Restaurant2",
-      "rating": 4.5,
-      "image": "Ravintola.jpg",
-      "food1": "Mussels in white wine sauce with cheese",
-      "food1Price": "10$"
-      
+      "name": "MCDonald's",
+      "rating": 4,
+      "image": "mcdonalds.jpg",
+      "address":"Kissan tie 1",
+      "operatingHours":"10-19",
+      "foods": [
+        {
+          "name": "Mussels in white wine sauce with cheese",
+          "price": "10$"
+        },
+        {
+          "name": "Cheese soup",
+          "price": "5$"
+        }
+      ]
     },
     {
-      "name": "Restaurant3",
+      "name": "Subway",
+      "rating": 2,
+      "image": "subway.jpg",
+      "address":"Sinappi katu 2",
+      "operatingHours":"10-19",
+      "foods": [
+        {
+          "name": "Mussels in white wine sauce with cheese",
+          "price": "10$"
+        },
+        {
+          "name": "Cheese soup",
+          "price": "5$"
+        }
+      ]
+    },
+    {
+      "name": "Picnic",
+      "rating": 3,
+      "image": "picnic.jpg",
+      "address":"Ketsuppi tie 18",
+      "operatingHours":"10-20",
+      "foods": [
+        {
+          "name": "Mussels in white wine sauce with cheese",
+          "price": "10$"
+        },
+        {
+          "name": "Cheese soup",
+          "price": "5$"
+        }
+      ]
+    },
+    {
+      "name": "Ravintola Pannu",
       "rating": 5,
-      "image": "Ravintola.jpg",
-      "food1": "test",
-      "food1Price": "10$"
-    },
-    {
-      "name": "Restaurant4",
-      "rating": 0,
-      "image": "Ravintola.jpg",
-      "food1": "test",
-      "food1Price": "10$"
-    },
-    {
-      "name": "Restaurant5",
-      "rating": 5,
-      "image": "Ravintola.jpg",
-      "food1": "test",
-      "food1Price": "10$"
+      "image": "pannu.jpg",
+      "address":"Kauha katu 5",
+      "operatingHours":"11-21",
+      "foods": [
+        {
+          "name": "Mussels in white wine sauce with cheese",
+          "price": "10$"
+        },
+        {
+          "name": "Cheese soup",
+          "price": "5$"
+        }
+      ]
     }
   ]
