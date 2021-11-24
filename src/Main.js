@@ -13,15 +13,11 @@ const axios = require('axios').default;
 
 
 // TODO:
-// customer(user) / admin ui
-// components for shopping cart, login
-// restaurant browsing could be the front page and automatically loaded to UI before login
+// admin ui (create restaurant button)
+// component for shopping cart
 // order food -> pay -> order preparing, ready, delivering... -> delivery ok, order closed
 // create account
 // order history
-// admin component for creating restaurant
-
-// information should not be lost during reboot so most of this has to eventually go to database
 
 const shoppingCart = props => {
   
@@ -38,15 +34,12 @@ const foodOrderingSystem = props => {
   // checkout order -> display delivery ETA etc
 
   // when order is closed after successful delivery,
-  // this should pass some info back to database
-  // to order history
+  // this should automatically post to OrderHistory
 }
 
 const adminUI = props => {
 
-
-  // render more stuff
-  // create restaurant etc
+  // render create restaurant button
 }
 
 
@@ -84,6 +77,10 @@ function Prototype() {
   const restaurants = data.map(restaurant => {
     return { ...restaurant, id: uuidv4() }
   })
+
+  //const dbRestaurants = dbArray.map(restaurant => {
+  //  return { ...restaurant, id: uuidv4() }
+  // })
 
   return (
     <body>
