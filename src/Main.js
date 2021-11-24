@@ -12,7 +12,6 @@ import Login from './components/Login.js';
 const ReactDOM = require('react-dom'); 
 const axios = require('axios').default;
 
-
 // TODO:
 // admin ui (create restaurant button)
 // component for shopping cart
@@ -44,6 +43,7 @@ const adminUI = props => {
   // render create restaurant button
 }
 
+var globalDBArray = [];
 
 function Restaurants() {
   //Get data from the api
@@ -68,7 +68,7 @@ function Restaurants() {
 
 function handleRestaurants(response) {
   var res = response;
-  console.log("in handleRestaurants() ", res.data);
+  console.log("in handleRestaurants() ");
 
   var dbArray = [];
 
@@ -76,11 +76,8 @@ function handleRestaurants(response) {
     dbArray.push([res.data[i].Name, res.data[i].OperatingHours, res.data[i].Address, res.data[i].PriceLevel]);
   }
 
-  console.log(dbArray);
-
-  const dbRestaurants = dbArray.map(restaurant => {
-    return { ...restaurant, id: uuidv4() }
-  });
+  globalDBArray = dbArray;
+  console.log("globalDBArray: ",globalDBArray);
 }
 
 Restaurants();
@@ -91,6 +88,8 @@ function Prototype() {
   const localRestaurants = data.map(restaurant => {
     return { ...restaurant, id: uuidv4() }
   })
+
+  console.log(globalDBArray);
 
   //const dbRestaurants = dbArray.map(restaurant => {
   //  var res = Restaurants();
