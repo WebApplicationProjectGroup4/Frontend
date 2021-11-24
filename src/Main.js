@@ -5,6 +5,7 @@ import React, {useState, useEffect} from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import ShopList from './components/ShopList.js';
+//import ShopListDB from './components/ShopListDB.js';
 import Menu from './components/RestaurantMenu.js';
 import Login from './components/Login.js';
 //const React = require('react'); 
@@ -19,12 +20,13 @@ const axios = require('axios').default;
 // create account
 // order history
 
+//Restaurants(); // get restaurants on site load
+
 const shoppingCart = props => {
   
-
   // keeps track of food orders from this current customer
   // customer username/unique id could be passed to this as props
-  // needs functions/components for adding & deleting stuff
+  // functions/components for adding & deleting stuff
 }
 
 const foodOrderingSystem = props => {
@@ -50,7 +52,8 @@ function Restaurants() {
 
   .then(function (response) {
     // handle success
-    console.log(response.data);
+    console.log("GET success -> handleRestaurants(response)");
+    handleRestaurants(response);
   })
 
   .catch(function (error) {
@@ -63,24 +66,37 @@ function Restaurants() {
   });
 }
 
-  /*const [restaurants, getRestaurants] = useState('');
-  //const url = 'http://localhost:3001/'
-  getAllRestaurants();
-  const getAllRestaurants = () => {
-    axios.get('/restaurants');
+function handleRestaurants(response) {
+  var res = response;
+  console.log("in handleRestaurants() ", res.data);
+
+  var dbArray = [];
+
+  for(var i = 0; i < res.data.length; i++) {
+    dbArray.push([res.data[i].Name, res.data[i].OperatingHours, res.data[i].Address, res.data[i].PriceLevel]);
   }
-}*/
+
+  console.log(dbArray);
+
+  const dbRestaurants = dbArray.map(restaurant => {
+    return { ...restaurant, id: uuidv4() }
+  });
+}
+
+Restaurants();
 
 function Prototype() {
 
-// using uuidv4 to make id:s
-  const restaurants = data.map(restaurant => {
+  // using uuidv4 to make id:s
+  const localRestaurants = data.map(restaurant => {
     return { ...restaurant, id: uuidv4() }
   })
 
   //const dbRestaurants = dbArray.map(restaurant => {
+  //  var res = Restaurants();
+  //  console.log(res);
   //  return { ...restaurant, id: uuidv4() }
-  // })
+  //})
 
   return (
     <body>
@@ -96,8 +112,10 @@ function Prototype() {
       </nav>
         <Routes>
           {/* Depending on route, renders that component */}
-          <Route path="/:restaurantId" element={ <Menu restaurants={ restaurants } /> } />
-          <Route path="/" element={ <ShopList restaurants ={ restaurants }/>} />
+          <Route path="/:restaurantId" element={ <Menu restaurants={ localRestaurants } /> } />
+          <Route path="/" element={ <ShopList restaurants ={ localRestaurants }/> } />
+          {/*<Route path="/:restaurantId" element={ <Menu restaurants={ dbRestaurants } /> } /> */}
+          {/*<Route path="/" element={ <ShopList restaurants ={ dbRestaurants }/> } /> */}
           <Route path="/login" element={ <Login />} />
         </Routes>
         <Footer />

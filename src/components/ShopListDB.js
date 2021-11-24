@@ -13,7 +13,7 @@ export default function restaurant(props) {
         <Link to={ restaurants.id } style={{ textDecoration: 'none' }}>
             <div className={ styles.restaurant }>
                 <div className={ styles.box}>
-                <div className={styles.picture}><img src={`/pictures/${restaurants.image}`} /></div>
+                <div className={styles.picture}><img src={`/pictures/Ravintola.jpg`} /></div>
           <div className={styles.name}>{restaurants.name}</div>
           <div>{ restaurants.priceLevel }*</div>
           </div>
