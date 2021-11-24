@@ -1,12 +1,9 @@
 import './styles/Main.css'
 import Footer from './components/Footer.js';
-import data from './components/data.json';
 import React, {useState, useEffect} from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-import ShopList from './components/ShopList.js';
-//import ShopListDB from './components/ShopListDB.js';
-import Menu from './components/RestaurantMenu.js';
+import ShopListDB from './components/ShopListDB.js';
 import Login from './components/Login.js';
 //const React = require('react'); 
 const ReactDOM = require('react-dom'); 
@@ -18,8 +15,6 @@ const axios = require('axios').default;
 // order food -> pay -> order preparing, ready, delivering... -> delivery ok, order closed
 // create account
 // order history
-
-//Restaurants(); // get restaurants on site load
 
 const shoppingCart = props => {
   
@@ -43,7 +38,7 @@ const adminUI = props => {
   // render create restaurant button
 }
 
-var globalDBArray = [];
+var globalDBArray = []; // global array for DB restaurants
 
 function Restaurants() {
   //Get data from the api
@@ -73,30 +68,39 @@ function handleRestaurants(response) {
   var dbArray = [];
 
   for(var i = 0; i < res.data.length; i++) {
-    dbArray.push([res.data[i].Name, res.data[i].OperatingHours, res.data[i].Address, res.data[i].PriceLevel]);
+
+    var globalDBObject = {name: "", operatingHours: "", address: "", priceLevel: 0};
+    // this gets pushed to globalDBArray
+    // we are pushing an object because we can name the fields for rendering purposes
+
+    globalDBObject.name = res.data[i].Name;
+    globalDBObject.operatingHours = res.data[i].OperatingHours;
+    globalDBObject.address = res.data[i].Address;
+    globalDBObject.priceLevel = res.data[i].PriceLevel; // loop through response, add to object fields
+
+    dbArray.push(globalDBObject); // push to array
   }
 
   globalDBArray = dbArray;
-  console.log("globalDBArray: ",globalDBArray);
+  console.log("globalDBArray in handleRestaurants(): ",globalDBArray);
 }
 
 Restaurants();
 
 function Prototype() {
 
-  // using uuidv4 to make id:s
-  const localRestaurants = data.map(restaurant => {
+  const dbRestaurants = globalDBArray.map(restaurant => {
     return { ...restaurant, id: uuidv4() }
   })
 
-  console.log(globalDBArray);
+  // wrong order during browser refresh
+  //it renders a null globalDBArray
 
-  //const dbRestaurants = dbArray.map(restaurant => {
-  //  var res = Restaurants();
-  //  console.log(res);
-  //  return { ...restaurant, id: uuidv4() }
-  //})
-
+  if (globalDBArray.length === 0) 
+    console.log("globalDBArray is null!");
+  else
+    console.log("globalDBArray is not null, render should be ok?");
+  
   return (
     <body>
     <BrowserRouter>
@@ -106,15 +110,13 @@ function Prototype() {
            <li> <input class="searchBar" type="text" placeholder="Implementing soon..." /> </li>
            <li> Help </li>
            <li></li>
-           <Link to="/login" ><button class="loginButton" onClick={Restaurants}> Kirjaudu </button></Link>
+           <Link to="/login" ><button class="loginButton" > Kirjaudu </button></Link>
         </ul>
       </nav>
         <Routes>
           {/* Depending on route, renders that component */}
-          <Route path="/:restaurantId" element={ <Menu restaurants={ localRestaurants } /> } />
-          <Route path="/" element={ <ShopList restaurants ={ localRestaurants }/> } />
-          {/*<Route path="/:restaurantId" element={ <Menu restaurants={ dbRestaurants } /> } /> */}
-          {/*<Route path="/" element={ <ShopList restaurants ={ dbRestaurants }/> } /> */}
+          {/*<Route path="/:restaurantId" element={ <MenuDB restaurants={ dbRestaurants } /> } /> */}
+          <Route path="/" element={ <ShopListDB restaurants ={ dbRestaurants }/> } />
           <Route path="/login" element={ <Login />} />
         </Routes>
         <Footer />

@@ -4,6 +4,7 @@ import styles from './Result.module.css';
 
 // create restaurant box with info from props
 export default function restaurant(props) {
+  console.log("in ShopList");
   return (
     <div className={styles.locked}>
       <div className={styles.title}>Restaurants</div>

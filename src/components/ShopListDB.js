@@ -4,6 +4,7 @@ import styles from './Result.module.css';
 
 // create restaurant box with info from props
 export default function restaurant(props) {
+  console.log("in ShopListDB");
   return (
     <div className={styles.locked}>
       <div className={styles.title}>Restaurants</div>
@@ -15,6 +16,8 @@ export default function restaurant(props) {
                 <div className={ styles.box}>
                 <div className={styles.picture}><img src={`/pictures/Ravintola.jpg`} /></div>
           <div className={styles.name}>{restaurants.name}</div>
+          <div>Open: {restaurants.operatingHours}</div>
+          <div>{restaurants.address}</div> 
           <div>{ restaurants.priceLevel }*</div>
           </div>
           </div>

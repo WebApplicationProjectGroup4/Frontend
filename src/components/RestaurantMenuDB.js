@@ -13,13 +13,13 @@ export default function Restaurants(props) {
     return <div className={styles.container}>No matching restaurant found.</div>
   }
 
-  //var menuArray = [];
+  var menuArray = [];
 
-  //for (var i = 0; i < restaurant.foods.length; i++) {
-  //  menuArray.push(restaurant.foods[i]);
-  //}
+  for (var i = 0; i < restaurant.foods.length; i++) {
+    menuArray.push(restaurant.foods[i]);
+  }
 
-  //console.log(menuArray);
+  console.log(menuArray);
 
   const content = menuArray.map((menu) =>
   
