@@ -49,16 +49,16 @@ function handleRestaurants(response) {
 
   for(var i = 0; i < res.data.length; i++) {
 
-    var globalDBObject = {idRestaurant: 0, name: "", operatingHours: "", address: "", priceLevel: 0, foods: ""};
+    var globalDBObject = {name: "", operatingHours: "", address: "", priceLevel: 0, foods: "", foodsPrices: ""};
     // this gets pushed to globalDBArray
     // we are pushing an object because we can name the fields for rendering purposes
 
-    globalDBObject.idRestaurant = res.data[i].idRestaurant;
     globalDBObject.name = res.data[i].Name;
     globalDBObject.operatingHours = res.data[i].OperatingHours;
     globalDBObject.address = res.data[i].Address;
     globalDBObject.priceLevel = res.data[i].PriceLevel;
-    globalDBObject.foods = res.data[i].Foods; // loop through response, add to object fields
+    globalDBObject.foods = res.data[i].Foods;
+    globalDBObject.foodsPrices = res.data[i].FoodsPrices; // loop through response, add to object fields
 
     dbArray.push(globalDBObject); // push to array
   }
