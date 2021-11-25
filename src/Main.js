@@ -70,9 +70,14 @@ class Prototype extends React.Component {
 
 constructor(props) {
       super();
-      this.state = { data: [] };
+      this.state = { data: [],
+      SearchString: ""
+     };
   }
-
+  onChange = (event) => {
+    console.log(event.target.value);
+    this.setState({SearchString: event.target.value});
+  }
   async componentDidMount() {
 
     await axios.get('/restaurants')
@@ -107,7 +112,7 @@ constructor(props) {
           <nav>
              <ul>
                <Link to="/" ><li>Home</li></Link>
-               <li> <input class="searchBar" type="text" placeholder="Implementing soon..." /> </li>
+               <li> <input class="searchBar" type="text" placeholder="Search..."  onChange={ this.onChange } /> </li>
                <li> Help </li>
                <li></li>
                <Link to="/login" ><button class="loginButton" > Kirjaudu </button></Link>
@@ -116,7 +121,7 @@ constructor(props) {
             <Routes>
               {/* Depending on route, renders that component */}
               <Route path="/:restaurantId" element={ <MenuDB restaurants={ dbRestaurants } /> } /> 
-              <Route path="/" element={ <ShopListDB restaurants ={ dbRestaurants }/> } />
+              <Route path="/" element={ <ShopListDB restaurants ={ dbRestaurants.filter((restaurant) => restaurant.name.toLowerCase().includes(this.state.SearchString))} /> } />
               <Route path="/login" element={ <Login />} />
             </Routes>
             <Footer />
