@@ -115,7 +115,7 @@ constructor(props) {
                <li> <input class="searchBar" type="text" placeholder="Search..."  onChange={ this.onChange } /> </li>
                <li> Help </li>
                <li></li>
-               <Link to="/login" ><button class="loginButton" > Kirjaudu </button></Link>
+               <Link to="/login" ><button class="loginButton" > Login </button></Link>
             </ul>
           </nav>
             <Routes>
