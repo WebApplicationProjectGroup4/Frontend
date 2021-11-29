@@ -1,8 +1,13 @@
-import React from 'react'
-import { useParams } from 'react-router-dom';
+import React, { useState } from 'react'
+import { Link, useParams } from 'react-router-dom';
 import styles from './Menu.module.css'
 
 export default function Restaurants(props) {
+
+  const [cart, setCart] = useState([]);
+   //adding items we have put into the usestate into sessionstorage for safe keeping 
+   // problem is resets if you go to new menu, either have to checkout from that restaurant or fix
+  sessionStorage.setItem('CartItems', JSON.stringify(cart));
 
   const result = useParams();
   // Finds restaurants and the id it has been assigned, if it matches to restaurant opens if not gives error
@@ -48,6 +53,11 @@ export default function Restaurants(props) {
     } // add last menu item price to array
   }
 
+  const addToCart = (menu) => {
+    //add the menu item we clicked to cart state
+    setCart([...cart, menu]);
+  };
+
   console.log("menu food array ", menuArray);
 
   const content = menuArray.map((menu) =>
@@ -55,14 +65,14 @@ export default function Restaurants(props) {
     <div className={styles.container}>
       <div className={styles.product}>{menu.foodName}</div>
       <div className={styles.prices}>{menu.foodPrice}€</div>
-      <div className={styles.cartbutton}><button>Add to cart</button></div>
+      <div className={styles.cartbutton}><button onClick={() => addToCart(menu)}>Add to cart</button></div>
     </div>
   );
-
   return (
     <div>
       <div className={styles.title}>Menu</div>
       {content}
+      <div className={styles.checkout}><Link to ="/checkout"><button>Checkout</button> </Link></div>
     </div>
 );
 } 

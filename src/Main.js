@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import ShopListDB from './components/ShopListDB.js';
 import MenuDB from './components/RestaurantMenuDB.js';
 import Login from './components/Login.js';
+import Cart from './components/Cart.js';
 //const React = require('react'); 
 const ReactDOM = require('react-dom'); 
 const axios = require('axios').default;
@@ -125,6 +126,7 @@ async componentDidMount() {
               <Route path="/:restaurantId" element={ <MenuDB restaurants={ dbRestaurants } /> } /> 
               <Route path="/" element={ <ShopListDB restaurants ={ dbRestaurants.filter((restaurant) => restaurant.name.toLowerCase().includes(this.state.SearchString))} /> } />
               <Route path="/login" element={ <Login />} />
+              <Route path="/checkout" element={ <Cart /> } />
             </Routes>
             <Footer />
         </BrowserRouter>
