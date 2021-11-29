@@ -38,7 +38,7 @@ export default function Restaurants(props) {
   for (var a = 0; a < restaurant.foodsPrices.length; a++) {
 
     if (restaurant.foodsPrices[a] === '-') { // if we hit a splitter, 
-      menuArray[x].foodPrice = price; // the index x is on in menuArray gets updated price from DB
+      menuArray[x].foodPrice = parseInt(price); // the index x is on in menuArray gets updated price from DB
       price = ``; // menu item's price str gets resetted
       x++; // increment by 1 on the array index
     } else price += restaurant.foodsPrices[a]; // else add char to menu item price str

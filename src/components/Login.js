@@ -29,13 +29,12 @@ function Login(props) {
     var un = username;
     var pw = password;
 
-    axios.get('/login', {
-      params: {
-        name: un,
+    axios.get('http://localhost:3001/login', {
+      auth: {
+        username: un,
         password: pw
       }
     })
-
     .then(function (response) {
       // handle success
       console.log(response.data);

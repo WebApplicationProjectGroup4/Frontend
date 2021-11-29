@@ -73,28 +73,30 @@ constructor(props) {
       this.state = { data: [],
       SearchString: ""
      };
-  }
-  onChange = (event) => {
-    console.log(event.target.value);
-    this.setState({SearchString: event.target.value});
-  }
-  async componentDidMount() {
+}
 
-    await axios.get('/restaurants')
+onChange = (event) => {
+  console.log(event.target.value);
+  this.setState({SearchString: event.target.value});
+}
 
-    .then(function (response) {
-      // handle success
-      console.log("componentDidMount GET success");
-      handleRestaurants(response);
-    })
+async componentDidMount() {
 
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    })
+  await axios.get('/restaurants')
 
-    this.setState({ data: globalDBArray });
-    console.log("State data: ", this.state.data);
+  .then(function (response) {
+    // handle success
+    console.log("componentDidMount GET success");
+    handleRestaurants(response);
+  })
+
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+
+  this.setState({ data: globalDBArray });
+  console.log("State data: ", this.state.data);
   }
 
   render() {
