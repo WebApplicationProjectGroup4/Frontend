@@ -6,7 +6,6 @@ function Footer() {
         <footer>
            <div className={styles.footer}>
                 <div className={styles.containerFooter}>
-                <h3 className={styles.titleFooter}> Footer</h3>
                 <div className={styles.row}>
                         <div className={styles.footer1}>
                             <p>Company logo?</p>
