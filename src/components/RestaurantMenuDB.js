@@ -5,8 +5,8 @@ import styles from './Menu.module.css'
 export default function Restaurants(props) {
 
   const [cart, setCart] = useState([]);
-   //adding items we have put into the usestate into sessionstorage for safe keeping 
-   // problem is resets if you go to new menu, either have to checkout from that restaurant or fix
+  //adding items we have put into usestate into sessionstorage for safe keeping
+//problems is resets if you go to new menu, either have to checkout from that restaurant or fix
   sessionStorage.setItem('CartItems', JSON.stringify(cart));
 
   const result = useParams();
@@ -58,8 +58,6 @@ export default function Restaurants(props) {
     setCart([...cart, menu]);
   };
 
-  console.log("menu food array ", menuArray);
-
   const content = menuArray.map((menu) =>
     
     <div className={styles.container}>
@@ -72,7 +70,7 @@ export default function Restaurants(props) {
     <div>
       <div className={styles.title}>Menu</div>
       {content}
-      <div className={styles.checkout}><Link to ="/checkout"><button>Checkout</button> </Link></div>
+      <Link to ="/checkout"><button>Checkout</button> </Link>
     </div>
 );
 } 
