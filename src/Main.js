@@ -18,23 +18,6 @@ const axios = require('axios').default;
 // create account
 // order history
 
-const shoppingCart = props => {
-  
-  // keeps track of food orders from this current customer
-  // customer username/unique id could be passed to this as props
-  // functions/components for adding & deleting stuff
-}
-
-const foodOrderingSystem = props => {
-
-  // this will be in direct relation with shoppingCart component
-  // i think we can do it all in a single component
-  // checkout order -> display delivery ETA etc
-
-  // when order is closed after successful delivery,
-  // this should automatically post to OrderHistory
-}
-
 const adminUI = props => {
 
   // render create restaurant button

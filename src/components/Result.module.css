@@ -16,7 +16,10 @@
   border-style: solid;
   border-radius: 4px;
   color: black;
-  min-width: 220px;
+  min-width: 250px;
+  max-width: 350px;
+  min-height: 200px;
+  max-height: 350px;
 }
 .restaurant:hover{
   transform: translateY(-2px);

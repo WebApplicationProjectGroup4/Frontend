@@ -3,7 +3,6 @@ import { Link, useParams } from 'react-router-dom';
 import styles from './Menu.module.css'
 
 export default function Restaurants(props) {
-
   const [cart, setCart] = useState([]);
   //adding items we have put into usestate into sessionstorage for safe keeping
 //problems is resets if you go to new menu, either have to checkout from that restaurant or fix
@@ -15,6 +14,7 @@ export default function Restaurants(props) {
   if(restaurant == null) {
     return <div className={styles.container}>No matching restaurant found.</div>
   }
+  
 
   var menuArray = [];
 
@@ -56,8 +56,12 @@ export default function Restaurants(props) {
   const addToCart = (menu) => {
     //add the menu item we clicked to cart state
     setCart([...cart, menu]);
-  };
+    };
 
+  const target = cart.find(target =>
+    target.itemName === target.itemId
+    );
+    
   const content = menuArray.map((menu) =>
     
     <div className={styles.container}>
@@ -70,7 +74,10 @@ export default function Restaurants(props) {
     <div>
       <div className={styles.title}>Menu</div>
       {content}
-      <Link to ="/checkout"><button>Checkout</button> </Link>
+      <div className={styles.container}>
+      <Link to ="/checkout"><button>Shopping cart</button> </Link>
+        </div>
+      
     </div>
 );
-} 
+}
