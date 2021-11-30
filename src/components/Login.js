@@ -26,6 +26,8 @@ function Login(props) {
       console.log("An error has occurred while trying to post order history.", error);
     });*/
 
+    var adminAccount;
+
     var un = username;
     var pw = password;
 
@@ -36,17 +38,19 @@ function Login(props) {
       }
     })
     .then(function (response) {
-      // handle success
-      console.log(response.data);
+      const admin = (response.data == 'Login ok - admin');
+      if (admin == true)
+        adminAccount = true;
+
+      else
+        adminAccount = false;
+
+      console.log(adminAccount);
     })
 
     .catch(function (error) {
-      // handle error
       console.log(error);
-    })
-
-    .then(function (response) {
-      // always executed
+      console.log(adminAccount);
     });
   }
  

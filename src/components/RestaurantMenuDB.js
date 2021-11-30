@@ -4,9 +4,8 @@ import styles from './Menu.module.css'
 
 export default function Restaurants(props) {
   const [cart, setCart] = useState([]);
-  //adding items we have put into usestate into sessionstorage for safe keeping
-//problems is resets if you go to new menu, either have to checkout from that restaurant or fix
-  sessionStorage.setItem('CartItems', JSON.stringify(cart));
+    //adding items we have put into usestate into sessionstorage for safe keeping
+  var test = JSON.parse(sessionStorage.getItem("Products")) || {};
 
   const result = useParams();
   // Finds restaurants and the id it has been assigned, if it matches to restaurant opens if not gives error
@@ -54,13 +53,20 @@ export default function Restaurants(props) {
   }
 
   const addToCart = (menu) => {
-    //add the menu item we clicked to cart state
-    setCart([...cart, menu]);
+    //add menu item to session storage
+
+    if (test[menu.id]){
+      test[menu.foodName].count++; // if it allready exists adds to the count
+    } else {
+      test[menu.foodName]={   // else adds the item to storage
+        foodName: menu.foodName,
+        foodPrice: menu.foodPrice,
+        count: 1
+      }
+    }
+    sessionStorage.setItem("Products", JSON.stringify(test));
     };
 
-  const target = cart.find(target =>
-    target.itemName === target.itemId
-    );
     
   const content = menuArray.map((menu) =>
     
