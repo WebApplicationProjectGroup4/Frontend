@@ -34,3 +34,9 @@
   margin-top: -20px;
   padding-top: 20px;
 }
+.quantity{
+  width: 20%;
+  text-align: center;
+  border-bottom: 1px solid lightgrey;
+  padding-top: 10px;
+}

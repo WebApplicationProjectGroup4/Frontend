@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import styles from './Menu.module.css'
 
 export default function Restaurants(props) {
   const [cart, setCart] = useState([]);
     //adding items we have put into usestate into sessionstorage for safe keeping
-  var test = JSON.parse(sessionStorage.getItem("Products")) || {};
 
   const result = useParams();
   // Finds restaurants and the id it has been assigned, if it matches to restaurant opens if not gives error
@@ -22,7 +21,7 @@ export default function Restaurants(props) {
 
   for (var i = 0; i < restaurant.foods.length; i++) {
 
-    var menuObject = {foodName: "", foodPrice: 0};
+    var menuObject = {foodName: "", foodPrice: 0, qty: 1};
     
     if (restaurant.foods[i] === '-') { // if we hit a splitter, 
       menuObject.foodName = food; // menuObject.foodName gets menu item,
@@ -53,20 +52,20 @@ export default function Restaurants(props) {
   }
 
   const addToCart = (menu) => {
-    //add menu item to session storage
-
-    if (test[menu.id]){
-      test[menu.foodName].count++; // if it allready exists adds to the count
-    } else {
-      test[menu.foodName]={   // else adds the item to storage
-        foodName: menu.foodName,
-        foodPrice: menu.foodPrice,
-        count: 1
-      }
+    const check_index = cart.findIndex(item=> item.foodName === menu.foodName);
+    //check if allready in cart, then adds to its quantity
+    if(check_index !== -1) {
+      cart[check_index].qty++;
+      console.log("Quantity updated")
+    } else { // else just add new
+      console.log("Item added")
+      setCart([...cart, menu])
     }
-    sessionStorage.setItem("Products", JSON.stringify(test));
+    sessionStorage.setItem("Products", JSON.stringify(cart));
     };
-
+    
+  var test = JSON.parse(sessionStorage.getItem("Products")) || {};
+    
     
   const content = menuArray.map((menu) =>
     
@@ -81,7 +80,7 @@ export default function Restaurants(props) {
       <div className={styles.title}>Menu</div>
       {content}
       <div className={styles.container}>
-      <Link to ="/checkout"><button>Shopping cart</button> </Link>
+      <Link to ="/checkout"><button>Shopping cart ({cart.length})</button> </Link>
         </div>
       
     </div>
