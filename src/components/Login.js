@@ -38,8 +38,8 @@ function Login(props) {
       }
     })
     .then(function (response) {
-      const admin = (response.data == 'Login ok - admin');
-      if (admin == true)
+      const admin = (response.data === 'Login ok - admin');
+      if (admin === true)
         adminAccount = true;
 
       else

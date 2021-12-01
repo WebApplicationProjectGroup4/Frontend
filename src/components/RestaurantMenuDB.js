@@ -3,17 +3,15 @@ import { Link, useParams } from 'react-router-dom';
 import styles from './Menu.module.css'
 
 export default function Restaurants(props) {
-  const [cart, setCart] = useState([]);
-    //adding items we have put into usestate into sessionstorage for safe keeping
+
+  var cartArray = props.cartData;
 
   const result = useParams();
   // Finds restaurants and the id it has been assigned, if it matches to restaurant opens if not gives error
   const restaurant = props.restaurants.find(restaurants => restaurants.id === result.restaurantId);
-  if(restaurant == null) {
+  if(restaurant == null)
     return <div className={styles.container}>No matching restaurant found.</div>
-  }
   
-
   var menuArray = [];
 
   let food = ``; // build menu item
@@ -47,24 +45,19 @@ export default function Restaurants(props) {
     } else price += restaurant.foodsPrices[a]; // else add char to menu item price str
 
     if (a+1 === restaurant.foodsPrices.length) {
-      menuArray[x].foodPrice = price;
+      menuArray[x].foodPrice = parseInt(price);
     } // add last menu item price to array
   }
 
   const addToCart = (menu) => {
-    const check_index = cart.findIndex(item=> item.foodName === menu.foodName);
-    //check if allready in cart, then adds to its quantity
-    if(check_index !== -1) {
-      cart[check_index].qty++;
-      console.log("Quantity updated")
-    } else { // else just add new
-      console.log("Item added")
-      setCart([...cart, menu])
-    }
-    sessionStorage.setItem("Products", JSON.stringify(cart));
+    
+    console.log(cartArray);
+    console.log(menu);
+    // if menu item already in cart -> increase qty
+    // else add menu item to cart with qty 1
+
     };
     
-  var test = JSON.parse(sessionStorage.getItem("Products")) || {};
     
     
   const content = menuArray.map((menu) =>
@@ -80,7 +73,7 @@ export default function Restaurants(props) {
       <div className={styles.title}>Menu</div>
       {content}
       <div className={styles.container}>
-      <Link to ="/checkout"><button>Shopping cart ({cart.length})</button> </Link>
+      <Link to ="/checkout"><button>Shopping cart</button> </Link>
         </div>
       
     </div>

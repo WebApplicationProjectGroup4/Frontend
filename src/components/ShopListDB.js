@@ -5,6 +5,7 @@ import styles from './Result.module.css';
 // create restaurant box with info from props
 export default function restaurant(props) {
   console.log("in ShopListDB");
+  
   function defaultImage() {
     console.log("Picture not found! In defaultImage()")
     //document.getElementById("img")

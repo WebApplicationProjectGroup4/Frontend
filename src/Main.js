@@ -55,7 +55,8 @@ class Prototype extends React.Component {
 constructor(props) {
       super();
       this.state = { data: [],
-      SearchString: ""
+      SearchString: "",
+      cartObject: {foodName: "", foodPrice: 0, qty: 0}
      };
 }
 
@@ -69,13 +70,10 @@ async componentDidMount() {
   await axios.get('/restaurants')
 
   .then(function (response) {
-    // handle success
-    console.log("componentDidMount GET success");
     handleRestaurants(response);
   })
 
   .catch(function (error) {
-    // handle error
     console.log(error);
   })
 
@@ -106,17 +104,16 @@ async componentDidMount() {
           </nav>
             <Routes>
               {/* Depending on route, renders that component */}
-              <Route path="/:restaurantId" element={ <MenuDB restaurants={ dbRestaurants } /> } /> 
+              <Route path="/:restaurantId" element={ <MenuDB restaurants={ dbRestaurants } cartData={ this.state.cartObject }/> } />
               <Route path="/" element={ <ShopListDB restaurants ={ dbRestaurants.filter((restaurant) => restaurant.name.toLowerCase().includes(this.state.SearchString))} /> } />
               <Route path="/login" element={ <Login />} />
-              <Route path="/checkout" element={ <Cart /> } />
+              <Route path="/checkout" element={ <Cart cartData={ this.state.cartObject } /> } />
             </Routes>
             <Footer />
         </BrowserRouter>
         </body>
       );
-    }
-    
+  }
 }
 
 export default Prototype;
