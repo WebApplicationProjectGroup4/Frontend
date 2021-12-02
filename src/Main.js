@@ -87,10 +87,6 @@ class Prototype extends React.Component {
 
   render() {
 
-    const showCartData = function(cartData) {
-      console.log(cartData);
-    }
-
     const dbRestaurants = globalDBArray.map(restaurant => {
       return { ...restaurant, id: uuidv4() }
     })
@@ -109,7 +105,6 @@ class Prototype extends React.Component {
                <li></li>
                <Link to="/login" ><button class="loginButton" > Login </button></Link>
                <Link to="/payment" ><button class="Button" > Payment </button> </Link>
-               <button class="loginButton" onClick={() => showCartData(this.state.cartData)} />
             </ul>
           </nav>
             <Routes>
