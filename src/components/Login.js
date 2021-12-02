@@ -9,8 +9,18 @@ function Login(props) {
  
   // test to check the value
   const handleLogin = () => {
-    login(username.value, password.value);
-  }
+    if (username.value, password.value !== '') //checking if the textboxes are empty or not
+      login(username.value, password.value);
+    else 
+     console.log("The entries can not be empty")
+    } 
+
+  const handleCreateAccount  = () => {
+      if (username.value, password.value !== '') //checking if the textboxes are empty or not
+      createAccount(username.value, password.value);
+    else 
+     console.log("The entries can not be empty")
+    } 
 
   function login(username, password) {
 
@@ -53,6 +63,40 @@ function Login(props) {
       console.log(adminAccount);
     });
   }
+
+  function createAccount(name, password) {
+
+    var un = name;
+    var pw = password;
+
+    axios.post('http://localhost:3001/users', { //Create account 
+      name: un,
+      password: pw,
+      adminAccount: 0 
+      })
+  
+    .then(function (response) {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.log("An error has occurred while trying to create account.", error.response.data);
+    })
+
+   /*axios.post('http://localhost:3001/restaurants', { //needs a button
+      name: "Turtles",
+      priceLevel: 1,
+      address: "Merikoskenkatu 609",
+      operatingHours: "8-18",
+      foods: "Donatello-Michelangelo-Raphael-Leonardo",
+      foodsPrices: "8-10-12-14",
+    })
+    .then(function (response) {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.log("An error has occurred while trying to post a restaurant.", error.response.data);
+    });*/
+  }
  
   return (
     <div className="Login">
@@ -65,6 +109,9 @@ function Login(props) {
         <div>Password</div>
         <input type="password" {...password} />
       </div>
+      
+      <div className="Title">New user? Sign up here</div>
+      <input className="Button" type="button" value={'Create Account'} onClick={handleCreateAccount}/><br />
       <input className="Button" type="button" value={'Login'} onClick={handleLogin}/><br />
     </div>
   );
@@ -83,5 +130,5 @@ const UserInput = initialValue => {
     onChange: handleChange,
   }
 }
- 
+
 export default Login;
