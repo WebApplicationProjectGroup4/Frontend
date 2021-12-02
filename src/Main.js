@@ -7,6 +7,8 @@ import ShopListDB from './components/ShopListDB.js';
 import MenuDB from './components/RestaurantMenuDB.js';
 import Login from './components/Login.js';
 import Cart from './components/Cart.js';
+import Payment from './components/Payment.js';
+import Delivery from './components/Delivery.js';
 //const React = require('react'); 
 const ReactDOM = require('react-dom'); 
 const axios = require('axios').default;
@@ -86,10 +88,6 @@ class Prototype extends React.Component {
 
   render() {
 
-    const showCartData = function(cartData) {
-      console.log(cartData);
-    }
-
     const dbRestaurants = globalDBArray.map(restaurant => {
       return { ...restaurant, id: uuidv4() }
     })
@@ -107,7 +105,7 @@ class Prototype extends React.Component {
                <li> Help </li>
                <li></li>
                <Link to="/login" ><button class="loginButton" > Login </button></Link>
-               <button class="loginButton" onClick={() => showCartData(this.state.cartData)} />
+               <Link to="/payment" ><button class="Button" > Payment </button> </Link>
             </ul>
           </nav>
             <Routes>
@@ -116,6 +114,8 @@ class Prototype extends React.Component {
               <Route path="/" element={ <ShopListDB restaurants ={ dbRestaurants.filter((restaurant) => restaurant.name.toLowerCase().includes(this.state.SearchString))} /> } />
               <Route path="/login" element={ <Login />} />
               <Route path="/checkout" element={ <Cart cartData={ this.state.cartData } /> } />
+              <Route path="/payment" element={ <Payment />} />
+              <Route path="/delivery" element={ <Delivery />} />
             </Routes>
             <Footer />
         </BrowserRouter>
