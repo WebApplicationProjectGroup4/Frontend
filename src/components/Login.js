@@ -27,6 +27,7 @@ function Login(props) {
     });*/
 
     var adminAccount;
+    var idUser;
 
     var un = username;
     var pw = password;
@@ -38,19 +39,22 @@ function Login(props) {
       }
     })
     .then(function (response) {
-      const admin = (response.data === 'Login ok - admin');
+      const admin = (response.data.includes("admin"));
       if (admin === true)
         adminAccount = true;
 
       else
         adminAccount = false;
 
-      console.log(adminAccount);
+      idUser = response.data.charAt(response.data.length-1);
+
+      console.log(response.data);
+      console.log("Admin account: ", adminAccount);
+      console.log("User id: ", idUser);
     })
 
     .catch(function (error) {
       console.log(error);
-      console.log(adminAccount);
     });
   }
  
