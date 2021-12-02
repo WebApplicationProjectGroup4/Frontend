@@ -52,36 +52,42 @@ function handleRestaurants(response) {
 
 class Prototype extends React.Component {
 
-constructor(props) {
+  constructor(props) {
       super();
       this.state = { data: [],
       SearchString: "",
-      cartObject: {foodName: "", foodPrice: 0, qty: 0}
+      cartData: []
      };
-}
-
-onChange = (event) => {
-  console.log(event.target.value);
-  this.setState({SearchString: event.target.value});
-}
-
-async componentDidMount() {
-
-  await axios.get('/restaurants')
-
-  .then(function (response) {
-    handleRestaurants(response);
-  })
-
-  .catch(function (error) {
-    console.log(error);
-  })
-
-  this.setState({ data: globalDBArray });
-  console.log("State data: ", this.state.data);
   }
 
+  onChange = (event) => {
+    console.log(event.target.value);
+    this.setState({SearchString: event.target.value});
+  }
+
+  async componentDidMount() {
+
+    await axios.get('/restaurants')
+
+    .then(function (response) {
+      handleRestaurants(response);
+    })
+
+    .catch(function (error) {
+      console.log(error);
+    })
+
+    this.setState({ data: globalDBArray });
+    console.log("Restaurant state data: ", this.state.data);
+  }
+
+  
+
   render() {
+
+    const showCartData = function(cartData) {
+      console.log(cartData);
+    }
 
     const dbRestaurants = globalDBArray.map(restaurant => {
       return { ...restaurant, id: uuidv4() }
@@ -100,14 +106,15 @@ async componentDidMount() {
                <li> Help </li>
                <li></li>
                <Link to="/login" ><button class="loginButton" > Login </button></Link>
+               <button class="loginButton" onClick={() => showCartData(this.state.cartData)} />
             </ul>
           </nav>
             <Routes>
               {/* Depending on route, renders that component */}
-              <Route path="/:restaurantId" element={ <MenuDB restaurants={ dbRestaurants } cartData={ this.state.cartObject }/> } />
+              <Route path="/:restaurantId" element={ <MenuDB restaurants={ dbRestaurants } cartData={ this.state.cartData }/> } />
               <Route path="/" element={ <ShopListDB restaurants ={ dbRestaurants.filter((restaurant) => restaurant.name.toLowerCase().includes(this.state.SearchString))} /> } />
               <Route path="/login" element={ <Login />} />
-              <Route path="/checkout" element={ <Cart cartData={ this.state.cartObject } /> } />
+              <Route path="/checkout" element={ <Cart cartData={ this.state.cartData } /> } />
             </Routes>
             <Footer />
         </BrowserRouter>

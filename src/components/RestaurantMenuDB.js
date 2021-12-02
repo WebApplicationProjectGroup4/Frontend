@@ -50,14 +50,35 @@ export default function Restaurants(props) {
   }
 
   const addToCart = (menu) => {
+
+    /*if (cartArray.length === 0)
+      cartArray.push(menu);
+    else {
+      for (let i = 0; i < cartArray.length; i++) {
+
+        if (cartArray[i].foodName === menu.foodName) {
+            console.log("Menu item match found");
+            console.log("Incrementing qty by 1");
+            cartArray[i].qty++;
+        } else cartArray.push(menu);
+      }
+    }*/
+
+    const index = cartArray.indexOf(menu);
     
-    console.log(cartArray);
-    console.log(menu);
+    if (index > -1)
+      cartArray[index].qty++;
+      
+    else cartArray.push(menu);
+
+    
+      
+    
     // if menu item already in cart -> increase qty
     // else add menu item to cart with qty 1
+    console.log(cartArray);
 
-    };
-    
+  };
     
     
   const content = menuArray.map((menu) =>
