@@ -1,0 +1,54 @@
+nav {
+    flex: 0 auto;
+    text-align: center;
+    Background-Color: rgb(31, 31, 31);
+    margin-bottom: 20px;
+}
+
+nav ul {
+    display: inline-block;
+    max-width: 1200px;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+    list-style-type: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+body {
+    background: rgb(0,251,234);
+    background: linear-gradient(90deg, rgba(0,251,234,1) 0%, rgba(99,183,255,1) 30%, rgba(99,183,255,1) 70%, rgba(75,224,255,1) 100%);
+
+    margin: 0px;
+
+    min-height: 100vh;
+    display:flex;
+    flex-direction: column;
+}
+
+.loginButton {
+    size: 150;
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: whitesmoke;
+    padding: 10px 20px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.searchBar{
+    height: 25px;
+    width: 200px;
+    margin-right: 50px;
+    border-radius: 4px;
+    border: none;
+}
+footer{
+    margin-top: auto;
+}
