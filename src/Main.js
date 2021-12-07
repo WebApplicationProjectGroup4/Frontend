@@ -8,16 +8,14 @@ import MenuDB from './components/RestaurantMenuDB.js';
 import Login from './components/Login.js';
 import Cart from './components/Cart.js';
 import Payment from './components/Payment.js';
-import Delivery from './components/Delivery.js';
+import Clock from './components/Clock.js';
 //const React = require('react'); 
 const ReactDOM = require('react-dom'); 
 const axios = require('axios').default;
 
 // TODO:
 // admin ui (create restaurant button)
-// component for shopping cart
 // order food -> pay -> order preparing, ready, delivering... -> delivery ok, order closed
-// create account
 // order history
 
 const adminUI = props => {
@@ -115,7 +113,7 @@ class Prototype extends React.Component {
               <Route path="/login" element={ <Login />} />
               <Route path="/checkout" element={ <Cart cartData={ this.state.cartData } /> } />
               <Route path="/payment" element={ <Payment />} />
-              <Route path="/delivery" element={ <Delivery />} />
+              <Route path="/delivery" element={ <Clock />} />
             </Routes>
             <Footer />
         </BrowserRouter>

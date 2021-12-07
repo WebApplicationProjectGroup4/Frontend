@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-//import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
+const axios = require('axios').default;
 
       function Payment(props) {
         //Const for users that saves the input
@@ -7,20 +8,27 @@ import React, { useState } from "react";
         const fullname = UserInput('');
         const phone = UserInput('');
         const address = UserInput('');
-       
-        // test to check the value
-        /*const handlePayment = () => {
-          payment(card.value, fullname.value, phone.value, address.value);
-        }*/
 
-        function Continue(){
-            if (card.value, fullname.value, phone.value, address.value === '') //checking if the textboxes are empty or not
-            console.log("The entries can not be empty") 
-            else {
-              console.log("Sending you to the delivery site")
-            }
-        }
-      
+        function Confirm(){
+          if (card.value, fullname.value, phone.value, address.value !== ''){ 
+            //checking if the textboxes are empty 
+          console.log("Delivery location: " + address.value)
+          /*axios.post('/orderhistory', { 
+            price: 5,
+            idUser: 1,
+            idRestaurant: 1
+          })
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log("An error has occurred while trying to post order history.", error);
+          })*/
+      }
+        else 
+        console.log("The entries can not be empty")  
+    } 
+    
       return (
         <div className="Login">
       <div className="Title">Please give your payment information to continue. </div>
@@ -36,7 +44,11 @@ import React, { useState } from "react";
       <div className="Details"> Address<br />
       <input type="text" {...address} />
       </div>
-      <input className="Button" type="button" value={'Continue to order'} onClick={Continue}/><br />
+      <div>
+        Delivery location: {address.value}
+      </div>
+      <input className="Button" type="button" value={'Confirm'} onClick={Confirm}/><br />
+      <Link to="/delivery" ><button class="Button" > Delivery </button> </Link>
       </div>
       );
     }

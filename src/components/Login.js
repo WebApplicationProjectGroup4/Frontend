@@ -23,18 +23,6 @@ function Login(props) {
     } 
 
   function login(username, password) {
-
-  /*axios.post('/orderhistory', { //Order history post ready, button missing
-      price: 5,
-      idUser: 1,
-      idRestaurant: 8
-    })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log("An error has occurred while trying to post order history.", error);
-    });*/
     
     axios({
       method: 'get',
@@ -63,7 +51,6 @@ function Login(props) {
       const admin = (response.data.includes("admin"));
       if (admin === true)
         adminAccount = true;
-
       else
         adminAccount = false;
 
@@ -112,8 +99,8 @@ function Login(props) {
       console.log("An error has occurred while trying to post a restaurant.", error.response.data);
     });*/
   }
- 
-  return (
+  
+    return(
     <div className="Login">
       <div className="Title">Login Page </div>
       <div className="Details">
@@ -124,13 +111,13 @@ function Login(props) {
         <div>Password</div>
         <input type="password" {...password} />
       </div>
-      
+      <input className="Button" type="button" value={'Login'} onClick={handleLogin}/><br />
+
       <div className="Title">New user? Sign up here</div>
       <input className="Button" type="button" value={'Create Account'} onClick={handleCreateAccount}/><br />
-      <input className="Button" type="button" value={'Login'} onClick={handleLogin}/><br />
     </div>
-  );
-}
+      );
+    }
  
 const UserInput = initialValue => {
   //

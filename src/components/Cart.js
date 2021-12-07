@@ -78,7 +78,7 @@ export default class Cart extends React.Component {
                 <div><button onClick={() => updateCart(menu.foodName, this.state.data)}> Remove </button></div>
             </div>  
             ));
-        
+    
         return(
             <div>
                 <div className={styles.title}>Cart Items</div>
