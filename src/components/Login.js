@@ -23,17 +23,6 @@ function Login(props) {
     } 
 
   function login(username, password) {
-    
-    axios({
-      method: 'get',
-      url: 'http://localhost:3001/orderhistory',
-      data: {
-        idUser: 1
-      }
-    })
-      .then(function (response) {
-        console.log(response.data);
-      });
 
     var adminAccount;
     var idUser;
@@ -49,16 +38,17 @@ function Login(props) {
     })
     .then(function (response) {
       const admin = (response.data.includes("admin"));
+      
       if (admin === true)
         adminAccount = true;
       else
         adminAccount = false;
 
       idUser = response.data.charAt(response.data.length-1);
-
       console.log(response.data);
       console.log("Admin account: ", adminAccount);
       console.log("User id: ", idUser);
+      sessionStorage.setItem('idUser', idUser);
     })
 
     .catch(function (error) {
@@ -83,21 +73,6 @@ function Login(props) {
     .catch(function (error) {
       console.log("An error has occurred while trying to create account.", error.response.data);
     })
-
-   /*axios.post('http://localhost:3001/restaurants', { //needs a button
-      name: "Turtles",
-      priceLevel: 1,
-      address: "Merikoskenkatu 609",
-      operatingHours: "8-18",
-      foods: "Donatello-Michelangelo-Raphael-Leonardo",
-      foodsPrices: "8-10-12-14",
-    })
-    .then(function (response) {
-      console.log(response.data);
-    })
-    .catch(function (error) {
-      console.log("An error has occurred while trying to post a restaurant.", error.response.data);
-    });*/
   }
   
     return(
@@ -134,3 +109,18 @@ const UserInput = initialValue => {
 }
 
 export default Login;
+
+ /*axios.post('http://localhost:3001/restaurants', { //needs a button
+      name: "Turtles",
+      priceLevel: 1,
+      address: "Merikoskenkatu 609",
+      operatingHours: "8-18",
+      foods: "Donatello-Michelangelo-Raphael-Leonardo",
+      foodsPrices: "8-10-12-14",
+    })
+    .then(function (response) {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.log("An error has occurred while trying to post a restaurant.", error.response.data);
+    });*/

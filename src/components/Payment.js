@@ -13,17 +13,21 @@ const axios = require('axios').default;
           if (card.value, fullname.value, phone.value, address.value !== ''){ 
             //checking if the textboxes are empty 
           console.log("Delivery location: " + address.value)
-          /*axios.post('/orderhistory', { 
-            price: 5,
-            idUser: 1,
-            idRestaurant: 1
+          let total = sessionStorage.getItem('totalPrice');
+          let idUser = sessionStorage.getItem('idUser');
+          let idRestaurant = sessionStorage.getItem('idRestaurant');
+          console.log('Total price: ', total, 'user ID: ', idUser, 'restaurant ID: ', idRestaurant);
+          axios.post('/orderhistory', { 
+            price: total,
+            idUser: idUser,
+            idRestaurant: idRestaurant
           })
           .then(function (response) {
             console.log(response);
           })
           .catch(function (error) {
             console.log("An error has occurred while trying to post order history.", error);
-          })*/
+          })
       }
         else 
         console.log("The entries can not be empty")  
@@ -52,7 +56,6 @@ const axios = require('axios').default;
       </div>
       );
     }
-
 
 const UserInput = initialValue => {
   const [value, setValue] = useState(initialValue);

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styles from './Menu.module.css'
+import { Link } from "react-router-dom";
 
 var globalCartArray = [];
 
@@ -21,13 +22,6 @@ function removeCartItem(foodName, data) {
     globalCartArray = localData;
 }
 
-const checkOutSystem = props => {
-    console.log("test");
-    // checkout order -> display delivery ETA etc
-    // when order is closed after successful delivery,
-    // this should automatically post to OrderHistory
-}
-
 const calculateTotal = data => {
 
     var total = 0;
@@ -43,6 +37,7 @@ const calculateTotal = data => {
             }
         });
     }
+    sessionStorage.setItem('totalPrice', total);
     return total;
 }
 
@@ -69,7 +64,6 @@ export default class Cart extends React.Component {
         if (!this.state.data)
             return( <div className={styles.title}>Cart is empty!</div> )
         
-        
         const cartItems = this.state.data.map((menu) => (
             <div className={styles.container}>
                 <div className={styles.product}>{menu.foodName}</div>
@@ -93,7 +87,7 @@ export default class Cart extends React.Component {
                 </div>
     
                 <div className={styles.container}>
-                    <div><button onClick={checkOutSystem}> Checkout </button></div>
+                <Link to="/payment" ><button class="Button" > Payment </button> </Link>
                     <h5>Total price: {total}€</h5>
                 </div>
             </div>

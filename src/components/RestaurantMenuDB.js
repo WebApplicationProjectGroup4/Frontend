@@ -33,7 +33,7 @@ export default function Restaurants(props) {
       menuArray.push(menuObject);
     } // add last menu item to array
   }
-
+  sessionStorage.setItem('idRestaurant', restaurant.idRestaurant);
   var x = 0; // using this to loop through array
   for (var a = 0; a < restaurant.foodsPrices.length; a++) {
 
@@ -70,7 +70,6 @@ export default function Restaurants(props) {
       
     else cartArray.push(menu);
 
-    
     // if menu item already in cart -> increase qty
     // else add menu item to cart with qty 1
     console.log(cartArray);

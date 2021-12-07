@@ -10,15 +10,12 @@ class Clock extends Component {
     this.setState({
       currentCount: this.state.currentCount - 1 //countdown
     })
-    /*if(this.state.currentCount < 1) { 
-      clearInterval(this.intervalId);
-    }*/
   }
+
   componentDidMount() {
     this.intervalId = setInterval(this.timer.bind(this), 1000); //1 second interval for timer update
   }
-  /*componentWillUnmount(){
-  }*/
+  
   render() {
     if(this.state.currentCount > 25 ) { //updating the text-render based on the current count (=time elapsed)
     return(

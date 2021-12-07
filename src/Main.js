@@ -103,7 +103,6 @@ class Prototype extends React.Component {
                <li> Help </li>
                <li></li>
                <Link to="/login" ><button class="loginButton" > Login </button></Link>
-               <Link to="/payment" ><button class="Button" > Payment </button> </Link>
             </ul>
           </nav>
             <Routes>
