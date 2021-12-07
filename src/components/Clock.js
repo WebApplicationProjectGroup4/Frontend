@@ -6,6 +6,7 @@ class Clock extends Component {
     super(props);
     this.state = {currentCount: 45} //setting the time for the counter
   }
+
   timer() {
     this.setState({
       currentCount: this.state.currentCount - 1 //countdown
@@ -17,25 +18,32 @@ class Clock extends Component {
   }
   
   render() {
+
     if(this.state.currentCount > 25 ) { //updating the text-render based on the current count (=time elapsed)
-    return(
-      <div>
-      <h1>We have received your order!</h1>
-      </div>
-    );
-  } else if (this.state.currentCount > 1 )
-  return(
-    <div>
-    <h1>Your order is ready and being delivered!</h1>
-    </div>
-  );
-  else if(this.state.currentCount = 1 )
-  return(
-    <div>
-    <h1>Delivery complete, enjoy your food!</h1>
-    <Link to="/" ><button class="Button" > Close order </button> </Link>
-    </div>
-  );
+      return(
+        <div>
+        <h1>We have received your order!</h1>
+        </div>
+      );
+    }
+    
+    else if (this.state.currentCount > 1 ) {
+      return(
+        <div>
+        <h1>Your order is ready and being delivered!</h1>
+        </div>
+      );
+    }
+  
+    else if(this.state.currentCount = 1 ) {
+      return(
+        <div>
+        <h1>Delivery complete, enjoy your food!</h1>
+        <Link to="/" ><button class="Button" > Close order </button> </Link>
+        </div>
+      );
+    }
+  }
 }
-}
+
 export default Clock;

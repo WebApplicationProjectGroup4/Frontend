@@ -9,6 +9,7 @@ import Login from './components/Login.js';
 import Cart from './components/Cart.js';
 import Payment from './components/Payment.js';
 import Clock from './components/Clock.js';
+import CreateRest from './components/CreateRestaurant.js';
 //const React = require('react'); 
 const ReactDOM = require('react-dom'); 
 const axios = require('axios').default;
@@ -103,6 +104,7 @@ class Prototype extends React.Component {
                <li> Help </li>
                <li></li>
                <Link to="/login" ><button class="loginButton" > Login </button></Link>
+               <Link to="/createrestaurant" ><button class="loginButton" > Create Restaurant </button></Link>
             </ul>
           </nav>
             <Routes>
@@ -113,6 +115,7 @@ class Prototype extends React.Component {
               <Route path="/checkout" element={ <Cart cartData={ this.state.cartData } /> } />
               <Route path="/payment" element={ <Payment />} />
               <Route path="/delivery" element={ <Clock />} />
+              <Route path="/createrestaurant" element={ <CreateRest />} />
             </Routes>
             <Footer />
         </BrowserRouter>

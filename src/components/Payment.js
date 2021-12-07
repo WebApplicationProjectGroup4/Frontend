@@ -1,61 +1,70 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+
 const axios = require('axios').default;
 
-      function Payment(props) {
-        //Const for users that saves the input
-        const card = UserInput('');
-        const fullname = UserInput('');
-        const phone = UserInput('');
-        const address = UserInput('');
+function Payment(props) {
 
-        function Confirm(){
-          if (card.value, fullname.value, phone.value, address.value !== ''){ 
-            //checking if the textboxes are empty 
-          console.log("Delivery location: " + address.value)
-          let total = sessionStorage.getItem('totalPrice');
-          let idUser = sessionStorage.getItem('idUser');
-          let idRestaurant = sessionStorage.getItem('idRestaurant');
-          console.log('Total price: ', total, 'user ID: ', idUser, 'restaurant ID: ', idRestaurant);
-          axios.post('/orderhistory', { 
-            price: total,
-            idUser: idUser,
-            idRestaurant: idRestaurant
-          })
-          .then(function (response) {
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log("An error has occurred while trying to post order history.", error);
-          })
-      }
-        else 
-        console.log("The entries can not be empty")  
-    } 
+  const card = UserInput('');
+  const fullname = UserInput('');
+  const phone = UserInput('');
+  const address = UserInput('');
+
+  function Confirm(){
+    if (card.value, fullname.value, phone.value, address.value !== ''){ 
+
+      console.log("Delivery location: " + address.value)
+      let menuItems = sessionStorage.getItem('menuItems')
+      let totalPrice = sessionStorage.getItem('totalPrice');
+      let idUser = sessionStorage.getItem('idUser');
+      let idRestaurant = sessionStorage.getItem('idRestaurant');
+
+      console.log('Ordered items: ', menuItems, 'Total price: ', totalPrice,
+      'user ID: ', idUser, 'restaurant ID: ', idRestaurant);
+
+      axios.post('http://localhost:3001/orderhistory', {
+        orderedItems: menuItems, 
+        price: totalPrice,
+        idUser: idUser,
+        idRestaurant: idRestaurant
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log("An error has occurred while trying to post order history.", error);
+      })
+    }
+    else console.log("The entries can not be empty!");      
+  } 
     
-      return (
-        <div className="Login">
+  return (
+    <div className="Login">
       <div className="Title">Please give your payment information to continue. </div>
+
       <div className="Details"> Credit card info<br />
-      <input type="text" {...card} />
+        <input type="text" {...card} />
       </div>
+
       <div className="Details"> Full name<br />
-      <input type="text" {...fullname} />
+        <input type="text" {...fullname} />
       </div>
+
       <div className="Details"> Phone number<br />
-      <input type="text" {...phone} />
+        <input type="text" {...phone} />
       </div>
+
       <div className="Details"> Address<br />
-      <input type="text" {...address} />
+        <input type="text" {...address} />
       </div>
-      <div>
-        Delivery location: {address.value}
-      </div>
+
+      <div>Delivery location: {address.value}</div>
+
       <input className="Button" type="button" value={'Confirm'} onClick={Confirm}/><br />
       <Link to="/delivery" ><button class="Button" > Delivery </button> </Link>
-      </div>
-      );
-    }
+    </div>
+  );
+}
 
 const UserInput = initialValue => {
   const [value, setValue] = useState(initialValue);

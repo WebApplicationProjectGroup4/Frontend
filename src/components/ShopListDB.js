@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import styles from './Result.module.css';
+import styles from '../styles/Result.module.css';
 
 // create restaurant box with info from props
 export default function restaurant(props) {

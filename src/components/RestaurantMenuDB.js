@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
-import styles from './Menu.module.css'
+import styles from '../styles/Menu.module.css'
 
 export default function Restaurants(props) {
 
@@ -33,7 +33,7 @@ export default function Restaurants(props) {
       menuArray.push(menuObject);
     } // add last menu item to array
   }
-  sessionStorage.setItem('idRestaurant', restaurant.idRestaurant);
+
   var x = 0; // using this to loop through array
   for (var a = 0; a < restaurant.foodsPrices.length; a++) {
 
@@ -48,20 +48,9 @@ export default function Restaurants(props) {
     } // add last menu item price to array
   }
 
+  sessionStorage.setItem('idRestaurant', restaurant.idRestaurant);
+  
   const addToCart = (menu) => {
-
-    /*if (cartArray.length === 0)
-      cartArray.push(menu);
-    else {
-      for (let i = 0; i < cartArray.length; i++) {
-
-        if (cartArray[i].foodName === menu.foodName) {
-            console.log("Menu item match found");
-            console.log("Incrementing qty by 1");
-            cartArray[i].qty++;
-        } else cartArray.push(menu);
-      }
-    }*/
 
     const index = cartArray.indexOf(menu);
     
@@ -71,9 +60,7 @@ export default function Restaurants(props) {
     else cartArray.push(menu);
 
     // if menu item already in cart -> increase qty
-    // else add menu item to cart with qty 1
-    console.log(cartArray);
-
+    // else add menu item to cart with default qty 1
   };
      
   const content = menuArray.map((menu) =>
@@ -91,7 +78,6 @@ export default function Restaurants(props) {
       <div className={styles.container}>
       <Link to ="/checkout"><button>Shopping cart</button> </Link>
         </div>
-      
     </div>
 );
 }

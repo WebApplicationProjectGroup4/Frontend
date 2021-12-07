@@ -1,0 +1,29 @@
+.container{
+    max-width: 1000px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+    background-color: whitesmoke;
+    padding-bottom: 10px;
+}
+.title{
+    text-align: center;
+    font-size: 36px;
+    background-color: whitesmoke;
+    max-width: 1000px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-top: -20px;
+    padding-top: 20px;
+}
+.RestaurantTable {
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+    background-color: whitesmoke;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    font-size: 18px;
+  }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Login.css";
+import "../styles/Login.css";
 const axios = require('axios').default;
 
 function Login(props) {
@@ -16,7 +16,7 @@ function Login(props) {
     } 
 
   const handleCreateAccount  = () => {
-      if (username.value, password.value !== '') //checking if the textboxes are empty or not
+    if (username.value, password.value !== '') //checking if the textboxes are empty or not
       createAccount(username.value, password.value);
     else 
      console.log("The entries can not be empty")
@@ -25,15 +25,11 @@ function Login(props) {
   function login(username, password) {
 
     var adminAccount;
-    var idUser;
-
-    var un = username;
-    var pw = password;
 
     axios.get('http://localhost:3001/login', {
       auth: {
-        username: un,
-        password: pw
+        username: username,
+        password: password
       }
     })
     .then(function (response) {
@@ -44,11 +40,11 @@ function Login(props) {
       else
         adminAccount = false;
 
-      idUser = response.data.charAt(response.data.length-1);
+      sessionStorage.setItem('idUser', response.data.charAt(response.data.length-1));
+
       console.log(response.data);
       console.log("Admin account: ", adminAccount);
-      console.log("User id: ", idUser);
-      sessionStorage.setItem('idUser', idUser);
+      console.log("User id: ", sessionStorage.getItem('idUser'));
     })
 
     .catch(function (error) {
@@ -56,14 +52,11 @@ function Login(props) {
     });
   }
 
-  function createAccount(name, password) {
-
-    var un = name;
-    var pw = password;
+  function createAccount(username, password) {
 
     axios.post('http://localhost:3001/users', { //Create account 
-      name: un,
-      password: pw,
+      name: username,
+      password: password,
       adminAccount: 0 
       })
   

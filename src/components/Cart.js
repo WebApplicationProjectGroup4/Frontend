@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import styles from './Menu.module.css'
+import styles from '../styles/Menu.module.css'
 import { Link } from "react-router-dom";
 
 var globalCartArray = [];
@@ -18,7 +18,6 @@ function removeCartItem(foodName, data) {
             else localData.splice(i, 1); 
         }
     }
-
     globalCartArray = localData;
 }
 
@@ -37,8 +36,25 @@ const calculateTotal = data => {
             }
         });
     }
+
     sessionStorage.setItem('totalPrice', total);
+    
     return total;
+}
+
+const buildMenuString = data => {
+
+    var foodNameStr = "";
+
+    for (let i = 0; i < data.length; i++) {
+        foodNameStr += data[i].foodName;
+        if (i+1 === data.length)
+            console.log("MenuString is ready: ", foodNameStr);
+        
+        else foodNameStr += "-";
+    }
+
+    sessionStorage.setItem('menuItems', foodNameStr);
 }
 
 export default class Cart extends React.Component {
@@ -55,6 +71,11 @@ export default class Cart extends React.Component {
     render() {
 
         var total = calculateTotal(this.state.data);
+        // send all cart items to calculation function during rendering
+        // which makes this realtime because we are dealing with state
+
+        buildMenuString(this.state.data);
+        // build menu string for db insert
 
         const updateCart = (foodName, functionData) => {
             removeCartItem(foodName, functionData);
