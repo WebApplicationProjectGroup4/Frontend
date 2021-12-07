@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../styles/Login.css";
+import adminCheck from "../globals/AdminBoolean";
 const axios = require('axios').default;
 
 function Login(props) {
@@ -13,18 +14,16 @@ function Login(props) {
       login(username.value, password.value);
     else 
      console.log("The entries can not be empty")
-    } 
+  } 
 
   const handleCreateAccount  = () => {
     if (username.value, password.value !== '') //checking if the textboxes are empty or not
       createAccount(username.value, password.value);
     else 
      console.log("The entries can not be empty")
-    } 
+  } 
 
   function login(username, password) {
-
-    var adminAccount;
 
     axios.get('http://localhost:3001/login', {
       auth: {
@@ -33,17 +32,13 @@ function Login(props) {
       }
     })
     .then(function (response) {
-      const admin = (response.data.includes("admin"));
-      
-      if (admin === true)
-        adminAccount = true;
-      else
-        adminAccount = false;
+     
+      console.log("AdminCheck with res parameter: ", adminCheck(response));
+      console.log("AdminCheck without res parameter: ", adminCheck());
 
       sessionStorage.setItem('idUser', response.data.charAt(response.data.length-1));
 
       console.log(response.data);
-      console.log("Admin account: ", adminAccount);
       console.log("User id: ", sessionStorage.getItem('idUser'));
     })
 
@@ -102,18 +97,3 @@ const UserInput = initialValue => {
 }
 
 export default Login;
-
- /*axios.post('http://localhost:3001/restaurants', { //needs a button
-      name: "Turtles",
-      priceLevel: 1,
-      address: "Merikoskenkatu 609",
-      operatingHours: "8-18",
-      foods: "Donatello-Michelangelo-Raphael-Leonardo",
-      foodsPrices: "8-10-12-14",
-    })
-    .then(function (response) {
-      console.log(response.data);
-    })
-    .catch(function (error) {
-      console.log("An error has occurred while trying to post a restaurant.", error.response.data);
-    });*/

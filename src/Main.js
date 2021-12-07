@@ -3,6 +3,7 @@ import Footer from './components/Footer.js';
 import React, {useState, useEffect} from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
+import adminCheck from "./globals/AdminBoolean";
 import ShopListDB from './components/ShopListDB.js';
 import MenuDB from './components/RestaurantMenuDB.js';
 import Login from './components/Login.js';
@@ -14,15 +15,13 @@ import CreateRest from './components/CreateRestaurant.js';
 const ReactDOM = require('react-dom'); 
 const axios = require('axios').default;
 
+//var adminBoolean = import("./globals/AdminBoolean.js")
+// works somewhat, but is a promise
+
+
 // TODO:
 // admin ui (create restaurant button)
-// order food -> pay -> order preparing, ready, delivering... -> delivery ok, order closed
 // order history
-
-const adminUI = props => {
-
-  // render create restaurant button
-}
 
 var globalDBArray = []; // global array for DB restaurants
 
@@ -52,14 +51,22 @@ function handleRestaurants(response) {
   globalDBArray = dbArray;
 }
 
+
+
 class Prototype extends React.Component {
 
   constructor(props) {
       super();
       this.state = { data: [],
       SearchString: "",
-      cartData: []
+      cartData: [],
+      adminAccount: false
      };
+  }
+
+  updateAdminState = () => {
+    let adminBoolean = adminCheck();
+    this.setState({ adminAccount: adminBoolean});
   }
 
   onChange = (event) => {
@@ -83,8 +90,6 @@ class Prototype extends React.Component {
     console.log("Restaurant state data: ", this.state.data);
   }
 
-  
-
   render() {
 
     const dbRestaurants = globalDBArray.map(restaurant => {
@@ -93,7 +98,8 @@ class Prototype extends React.Component {
 
     if (!this.state.data)
       return <div />
-          
+    
+    if (this.state.adminAccount === false) {
       return (
         <body>
         <BrowserRouter>
@@ -104,6 +110,36 @@ class Prototype extends React.Component {
                <li> Help </li>
                <li></li>
                <Link to="/login" ><button class="loginButton" > Login </button></Link>
+               <button class="loginButton" onClick={this.updateAdminState} > Refresh </button>
+            </ul>
+          </nav>
+            <Routes>
+              {/* Depending on route, renders that component */}
+              <Route path="/:restaurantId" element={ <MenuDB restaurants={ dbRestaurants } cartData={ this.state.cartData }/> } />
+              <Route path="/" element={ <ShopListDB restaurants ={ dbRestaurants.filter((restaurant) => restaurant.name.toLowerCase().includes(this.state.SearchString))} /> } />
+              <Route path="/login" element={ <Login adminData={ this.state.adminAccount } /> } />
+              <Route path="/checkout" element={ <Cart cartData={ this.state.cartData } /> } />
+              <Route path="/payment" element={ <Payment />} />
+              <Route path="/delivery" element={ <Clock />} />
+            </Routes>
+            <Footer />
+        </BrowserRouter>
+        </body>
+      );
+    }
+    
+
+      return (
+        <body>
+        <BrowserRouter>
+          <nav>
+             <ul>
+               <Link to="/" ><li>Home</li></Link>
+               <li> <input class="searchBar" type="text" placeholder="Search..."  onChange={ this.onChange } /> </li>
+               <li> Help </li>
+               <li></li>
+               <Link to="/login" ><button class="loginButton" > Login </button></Link>
+               <button class="loginButton" onClick={this.updateAdminState} > Refresh </button>
                <Link to="/createrestaurant" ><button class="loginButton" > Create Restaurant </button></Link>
             </ul>
           </nav>
@@ -111,7 +147,7 @@ class Prototype extends React.Component {
               {/* Depending on route, renders that component */}
               <Route path="/:restaurantId" element={ <MenuDB restaurants={ dbRestaurants } cartData={ this.state.cartData }/> } />
               <Route path="/" element={ <ShopListDB restaurants ={ dbRestaurants.filter((restaurant) => restaurant.name.toLowerCase().includes(this.state.SearchString))} /> } />
-              <Route path="/login" element={ <Login />} />
+              <Route path="/login" element={ <Login adminData={ this.state.adminAccount } /> } />
               <Route path="/checkout" element={ <Cart cartData={ this.state.cartData } /> } />
               <Route path="/payment" element={ <Payment />} />
               <Route path="/delivery" element={ <Clock />} />
