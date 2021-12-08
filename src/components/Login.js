@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../styles/Login.css";
+import { useNavigate } from "react-router-dom";
 import adminCheck from "../globals/AdminBoolean";
 const axios = require('axios').default;
 
@@ -7,7 +8,7 @@ function Login(props) {
   //Const for users that saves the input
   const username = UserInput('');
   const password = UserInput('');
- 
+  let navigate = useNavigate();
   // test to check the value
   const handleLogin = () => {
     if (username.value, password.value !== '') //checking if the textboxes are empty or not
@@ -32,7 +33,7 @@ function Login(props) {
       }
     })
     .then(function (response) {
-     
+
       console.log("AdminCheck with res parameter: ", adminCheck(response));
       console.log("AdminCheck without res parameter: ", adminCheck());
 
@@ -40,6 +41,8 @@ function Login(props) {
 
       console.log(response.data);
       console.log("User id: ", sessionStorage.getItem('idUser'));
+      navigate('/');
+      props.updateAdminState();
     })
 
     .catch(function (error) {

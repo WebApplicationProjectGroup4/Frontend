@@ -20,7 +20,6 @@ const axios = require('axios').default;
 
 
 // TODO:
-// admin ui (create restaurant button)
 // order history
 
 var globalDBArray = []; // global array for DB restaurants
@@ -52,7 +51,6 @@ function handleRestaurants(response) {
 }
 
 
-
 class Prototype extends React.Component {
 
   constructor(props) {
@@ -63,7 +61,6 @@ class Prototype extends React.Component {
       adminAccount: false
      };
   }
-
   updateAdminState = () => {
     let adminBoolean = adminCheck();
     this.setState({ adminAccount: adminBoolean});
@@ -91,7 +88,6 @@ class Prototype extends React.Component {
   }
 
   render() {
-
     const dbRestaurants = globalDBArray.map(restaurant => {
       return { ...restaurant, id: uuidv4() }
     })
@@ -105,19 +101,18 @@ class Prototype extends React.Component {
         <BrowserRouter>
           <nav>
              <ul>
-               <Link to="/" ><li>Home</li></Link>
+               <Link to="/" ><li onClick={this.updateAdminState}>Home</li></Link>
                <li> <input class="searchBar" type="text" placeholder="Search..."  onChange={ this.onChange } /> </li>
                <li> Help </li>
                <li></li>
                <Link to="/login" ><button class="loginButton" > Login </button></Link>
-               <button class="loginButton" onClick={this.updateAdminState} > Refresh </button>
             </ul>
           </nav>
             <Routes>
               {/* Depending on route, renders that component */}
               <Route path="/:restaurantId" element={ <MenuDB restaurants={ dbRestaurants } cartData={ this.state.cartData }/> } />
               <Route path="/" element={ <ShopListDB restaurants ={ dbRestaurants.filter((restaurant) => restaurant.name.toLowerCase().includes(this.state.SearchString))} /> } />
-              <Route path="/login" element={ <Login adminData={ this.state.adminAccount } /> } />
+              <Route path="/login" element={ <Login adminData={ this.state.adminAccount } updateAdminState={this.updateAdminState} /> } />
               <Route path="/checkout" element={ <Cart cartData={ this.state.cartData } /> } />
               <Route path="/payment" element={ <Payment />} />
               <Route path="/delivery" element={ <Clock />} />
@@ -134,12 +129,11 @@ class Prototype extends React.Component {
         <BrowserRouter>
           <nav>
              <ul>
-               <Link to="/" ><li>Home</li></Link>
+              <Link to="/" ><li onClick={this.updateAdminState}>Home</li></Link>
                <li> <input class="searchBar" type="text" placeholder="Search..."  onChange={ this.onChange } /> </li>
                <li> Help </li>
                <li></li>
-               <Link to="/login" ><button class="loginButton" > Login </button></Link>
-               <button class="loginButton" onClick={this.updateAdminState} > Refresh </button>
+               <Link to="/login" ><button class="loginButton" > Logout </button></Link>
                <Link to="/createrestaurant" ><button class="loginButton" > Create Restaurant </button></Link>
             </ul>
           </nav>
