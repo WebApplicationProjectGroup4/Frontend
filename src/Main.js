@@ -11,6 +11,8 @@ import Cart from './components/Cart.js';
 import Payment from './components/Payment.js';
 import Clock from './components/Clock.js';
 import CreateRest from './components/CreateRestaurant.js';
+import CheckOrder from './components/CheckOrder.js';
+
 //const React = require('react'); 
 const ReactDOM = require('react-dom'); 
 const axios = require('axios').default;
@@ -134,7 +136,8 @@ class Prototype extends React.Component {
                <li> <input class="searchBar" type="text" placeholder="Search..."  onChange={ this.onChange } /> </li>
                <li> Help </li>
                <li></li>
-               <Link to="/"> <button class="loginButton" onClick={() => this.setState({ loggedIn: false, adminAccount: false})} > Logout </button></Link>
+               <Link to="/"> <button class="loginButton" onClick={() => sessionStorage.clear(), this.setState({ loggedIn: false, adminAccount: false})} > Logout </button></Link>
+               <Link to="/checkorder" ><button class="Button" > Order History </button></Link>
             </ul>
           </nav>
             <Routes>
@@ -145,6 +148,7 @@ class Prototype extends React.Component {
               <Route path="/checkout" element={ <Cart cartData={ this.state.cartData } /> } />
               <Route path="/payment" element={ <Payment />} />
               <Route path="/delivery" element={ <Clock />} />
+              <Route path="/checkorder" element={ <CheckOrder />} />
             </Routes>
             <Footer />
         </BrowserRouter>
@@ -161,7 +165,7 @@ class Prototype extends React.Component {
                <li> <input class="searchBar" type="text" placeholder="Search..."  onChange={ this.onChange } /> </li>
                <li> Help </li>
                <li></li>
-               <Link to="/"> <button class="loginButton" onClick={() => this.setState({ loggedIn: false, adminAccount: false})} > Logout </button></Link>
+               <Link to="/"> <button class="loginButton" onClick={() => sessionStorage.clear(), this.setState({ loggedIn: false, adminAccount: false})} > Logout </button></Link>
                <Link to="/createrestaurant" ><button class="loginButton" > Create Restaurant </button></Link>
             </ul>
           </nav>
@@ -173,6 +177,7 @@ class Prototype extends React.Component {
               <Route path="/checkout" element={ <Cart cartData={ this.state.cartData } /> } />
               <Route path="/payment" element={ <Payment />} />
               <Route path="/delivery" element={ <Clock />} />
+              <Route path="/checkorder" element={ <CheckOrder />} />
               <Route path="/createrestaurant" element={ <CreateRest />} />
             </Routes>
             <Footer />

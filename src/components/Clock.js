@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 class Clock extends Component {
   constructor(props){
     super(props);
-    this.state = {currentCount: 45} //setting the time for the counter
+    this.state = {currentCount: 10} //setting the time for the counter
   }
 
   timer() {
@@ -19,7 +19,7 @@ class Clock extends Component {
   
   render() {
 
-    if(this.state.currentCount > 25 ) { //updating the text-render based on the current count (=time elapsed)
+    if(this.state.currentCount > 5 ) { //updating the text-render based on the current count (=time elapsed)
       return(
         <div>
         <h1>We have received your order!</h1>
@@ -40,6 +40,7 @@ class Clock extends Component {
         <div>
         <h1>Delivery complete, enjoy your food!</h1>
         <Link to="/" ><button class="Button" > Close order </button> </Link>
+        <Link to="/checkorder" ><button class="Button" > See your order history </button> </Link>
         </div>
       );
     }

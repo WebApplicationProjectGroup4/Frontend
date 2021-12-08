@@ -14,7 +14,7 @@ function Payment(props) {
     if (card.value, fullname.value, phone.value, address.value !== ''){ 
 
       console.log("Delivery location: " + address.value)
-      let menuItems = sessionStorage.getItem('menuItems')
+      let menuItems = sessionStorage.getItem('menuItems');
       let totalPrice = sessionStorage.getItem('totalPrice');
       let idUser = sessionStorage.getItem('idUser');
       let idRestaurant = sessionStorage.getItem('idRestaurant');
