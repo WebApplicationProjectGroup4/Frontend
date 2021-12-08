@@ -103,7 +103,7 @@ class Prototype extends React.Component {
         <BrowserRouter>
           <nav>
              <ul>
-               <Link to="/" ><li onClick={this.updateAdminState}>Home</li></Link>
+               <Link to="/" ><li>Home</li></Link>
                <li> <input class="searchBar" type="text" placeholder="Search..."  onChange={ this.onChange } /> </li>
                <li> Help </li>
                <li></li>
