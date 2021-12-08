@@ -37,7 +37,7 @@ function Payment(props) {
     }
     else console.log("The entries can not be empty!");      
   } 
-    
+ if (card.value, fullname.value, phone.value, address.value !== ''){ 
   return (
     <div className="Login">
       <div className="Title">Please give your payment information to continue. </div>
@@ -59,11 +59,37 @@ function Payment(props) {
       </div>
 
       <div>Delivery location: {address.value}</div>
-
-      <input className="Button" type="button" value={'Confirm'} onClick={Confirm}/><br />
-      <Link to="/delivery" ><button class="Button" > Delivery </button> </Link>
+    
+      <Link to="/delivery" ><input className="Button" type="button" value={'Confirm'} onClick={Confirm}/><br /> </Link>
     </div>
   );
+ }
+ else
+ return (
+  <div className="Login">
+    <div className="Title">Please give your payment information to continue. </div>
+
+    <div className="Details"> Credit card info<br />
+      <input type="text" {...card} />
+    </div>
+
+    <div className="Details"> Full name<br />
+      <input type="text" {...fullname} />
+    </div>
+
+    <div className="Details"> Phone number<br />
+      <input type="text" {...phone} />
+    </div>
+
+    <div className="Details"> Address<br />
+      <input type="text" {...address} />
+    </div>
+
+    <div>Delivery location: {address.value}</div>
+  
+    <input className="Button" type="button" value={'Confirm'} onClick={Confirm}/><br />
+  </div>
+ );
 }
 
 const UserInput = initialValue => {
