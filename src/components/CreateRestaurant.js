@@ -1,38 +1,48 @@
 import axios from 'axios';
-import React, { useState} from 'react'
-import styles from '../styles/CreateRestaurant.module.css'
+import React, { useState } from 'react';
+import styles from '../styles/CreateRestaurant.module.css';
 
 function CreateRestaurant() {
-    const UserInput = initialValue => {
-        const [value, setValue] = useState(initialValue);
-        // Sets the value of what was written
-        const handleChange = e => {
-          setValue(e.target.value);
-        }
-        return {
-          //returns the value
-          value,
-          onChange: handleChange,
-        }
+
+  const [selectedFile, setSelectedFile] = useState();
+	const [isFilePicked, setIsFilePicked] = useState(false);
+
+  const changeHandler = (event) => {
+		setSelectedFile(event.target.files[0]);
+	};
+
+  const UserInput = initialValue => {
+    const [value, setValue] = useState(initialValue);
+    // Sets the value of what was written
+    const handleChange = e => {
+      setValue(e.target.value);
     }
-    const RestaurantName = UserInput('');
-    const OperatingHours = UserInput('');
-    const Address = UserInput('');
-    const PriceLevel = UserInput('');
-    const Foods = UserInput('');
-    const FoodsPrices = UserInput('');
+
+    return {
+      //returns the value
+      value,
+      onChange: handleChange,
+    }
+  }
+
+  const RestaurantName = UserInput('');
+  const OperatingHours = UserInput('');
+  const Address = UserInput('');
+  const PriceLevel = UserInput('');
+  const Foods = UserInput('');
+  const FoodsPrices = UserInput('');
 
     
-    function post(){
+  function post(){
     
-      // Post to backend restaurant that gets values from fields
-        axios.post('http://localhost:3001/restaurants', {
-        name: RestaurantName.value,
-        priceLevel: PriceLevel.value,
-        address: Address.value,
-        operatingHours: OperatingHours.value,
-        foods: Foods.value,
-        foodsPrices: FoodsPrices.value,
+    // Post to backend restaurant that gets values from fields
+    axios.post('http://localhost:3001/restaurants', {
+      name: RestaurantName.value,
+      priceLevel: PriceLevel.value,
+      address: Address.value,
+      operatingHours: OperatingHours.value,
+      foods: Foods.value,
+      foodsPrices: FoodsPrices.value,
     })
     .then(function (response) {
       console.log(response.data);
@@ -40,8 +50,23 @@ function CreateRestaurant() {
     .catch(function (error) {
       console.log("An error has occurred while trying to post a restaurant.", error.response.data);
     });
-    }
-    return(
+
+    const formData = new FormData();
+    formData.append('img', selectedFile);
+    formData.append('text', RestaurantName.value);
+
+    axios.post('http://localhost:3001/upload', formData)
+
+    .then(function (response) {
+      console.log(response.data);
+    })
+    
+    .catch(function (error) {
+      console.log("An error has occurred while trying to post a restaurant image.", error.response.data);
+    });
+  }
+
+  return(
         <div>
             <div className={styles.title}>Creating Restaurant</div>
             
@@ -53,11 +78,11 @@ function CreateRestaurant() {
                     <div>Price Level<br /> <input type="number" min="1" max="5" {...PriceLevel}/></div>
                     <div>Add your food, separate with - <br /> <input type="text"  {...Foods}/></div>
                     <div>Price matching the food, separate with -<br /> <input type="text"  {...FoodsPrices}/></div>
+                    <div>Restaurant Image<br /> <input type="file" onChange={changeHandler}/></div>
                     <input type="button" value={'Add your restaurant'} onClick={post} />
                 </div> 
             </div>
         </div>
-    )
-    
+  )
 }
 export default CreateRestaurant;
