@@ -58,12 +58,14 @@ class Prototype extends React.Component {
       this.state = { data: [],
       SearchString: "",
       cartData: [],
-      adminAccount: false
+      adminAccount: false,
+      loggedIn: false,
      };
   }
   updateAdminState = () => {
     let adminBoolean = adminCheck();
     this.setState({ adminAccount: adminBoolean});
+    this.setState({ loggedIn: true });
   }
 
   onChange = (event) => {
@@ -95,7 +97,7 @@ class Prototype extends React.Component {
     if (!this.state.data)
       return <div />
     
-    if (this.state.adminAccount === false) {
+    if (this.state.adminAccount === false && this.state.loggedIn === false) {
       return (
         <body>
         <BrowserRouter>
@@ -122,18 +124,44 @@ class Prototype extends React.Component {
         </body>
       );
     }
-    
+    if (this.state.adminAccount === false && this.state.loggedIn === true) {
+      return (
+        <body>
+        <BrowserRouter>
+          <nav>
+             <ul>
+               <Link to="/" ><li>Home</li></Link>
+               <li> <input class="searchBar" type="text" placeholder="Search..."  onChange={ this.onChange } /> </li>
+               <li> Help </li>
+               <li></li>
+               <Link to="/"> <button class="loginButton" onClick={() => this.setState({ loggedIn: false, adminAccount: false})} > Logout </button></Link>
+            </ul>
+          </nav>
+            <Routes>
+              {/* Depending on route, renders that component */}
+              <Route path="/:restaurantId" element={ <MenuDB restaurants={ dbRestaurants } cartData={ this.state.cartData }/> } />
+              <Route path="/" element={ <ShopListDB restaurants ={ dbRestaurants.filter((restaurant) => restaurant.name.toLowerCase().includes(this.state.SearchString))} /> } />
+              <Route path="/login" element={ <Login adminData={ this.state.adminAccount } updateAdminState={this.updateAdminState} /> } />
+              <Route path="/checkout" element={ <Cart cartData={ this.state.cartData } /> } />
+              <Route path="/payment" element={ <Payment />} />
+              <Route path="/delivery" element={ <Clock />} />
+            </Routes>
+            <Footer />
+        </BrowserRouter>
+        </body>
+      );
+    }
 
       return (
         <body>
         <BrowserRouter>
           <nav>
              <ul>
-              <Link to="/" ><li onClick={this.updateAdminState}>Home</li></Link>
+              <Link to="/" ><li>Home</li></Link>
                <li> <input class="searchBar" type="text" placeholder="Search..."  onChange={ this.onChange } /> </li>
                <li> Help </li>
                <li></li>
-               <Link to="/login" ><button class="loginButton" > Logout </button></Link>
+               <Link to="/"> <button class="loginButton" onClick={() => this.setState({ loggedIn: false, adminAccount: false})} > Logout </button></Link>
                <Link to="/createrestaurant" ><button class="loginButton" > Create Restaurant </button></Link>
             </ul>
           </nav>
