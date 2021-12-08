@@ -136,7 +136,7 @@ class Prototype extends React.Component {
                <li> <input class="searchBar" type="text" placeholder="Search..."  onChange={ this.onChange } /> </li>
                <li> Help </li>
                <li></li>
-               <Link to="/"> <button class="loginButton" onClick={() => sessionStorage.clear(), this.setState({ loggedIn: false, adminAccount: false})} > Logout </button></Link>
+               <Link to="/"> <button class="loginButton" onClick={() => this.setState({ loggedIn: false, adminAccount: false})} > Logout </button></Link>
                <Link to="/checkorder" ><button class="Button" > Order History </button></Link>
             </ul>
           </nav>
@@ -165,7 +165,7 @@ class Prototype extends React.Component {
                <li> <input class="searchBar" type="text" placeholder="Search..."  onChange={ this.onChange } /> </li>
                <li> Help </li>
                <li></li>
-               <Link to="/"> <button class="loginButton" onClick={() => sessionStorage.clear(), this.setState({ loggedIn: false, adminAccount: false})} > Logout </button></Link>
+               <Link to="/"> <button class="loginButton" onClick={() => this.setState({ loggedIn: false, adminAccount: false})} > Logout </button></Link>
                <Link to="/createrestaurant" ><button class="loginButton" > Create Restaurant </button></Link>
             </ul>
           </nav>
