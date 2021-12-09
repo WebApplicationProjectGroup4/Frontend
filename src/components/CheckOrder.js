@@ -9,22 +9,17 @@ var orderArray = [];
 
 const handleRestaurantNames = res => {
 
-  for (var i = 0; i <= orderArray.length; i++) {
+  for (var i = 0; i < orderArray.length; i++) {
 
-    //var currentID;
     var currentID = orderArray[i].idRestaurant;
-    console.log("Current id:" , currentID)
 
-    for (var x = 0; x < res.data.length; x++) {
+    for (var increment = 0; increment < res.data.length; increment++) {
 
-      if (x+1 !== res.data.length) {
+      if (currentID === res.data[increment].idRestaurant)
+        orderArray[i].restaurantName = res.data[increment].Name;
 
-        if (currentID === res.data[x].idRestaurant) {
-          console.log("Match found!", currentID, res.data[x].idRestaurant)
-          console.log(orderArray[x]);
-          orderArray[x].restaurantName = res.data[x].Name;
-        }
-      }
+      else if (i+1 === res.data.length)
+        console.log("i+1 is res.data.length: ", res.data.length);
     }
   }
 }
@@ -53,7 +48,7 @@ function UpdateOrder(response) {
   }
 
   orderArray = dbArray;
-  console.log(orderArray);
+  //console.log(orderArray);
 } 
 
 class CheckOrder extends React.Component {
