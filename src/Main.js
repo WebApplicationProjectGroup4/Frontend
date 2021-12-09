@@ -1,6 +1,6 @@
 import './styles/Main.css'
 import Footer from './components/Footer.js';
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import adminCheck from "./globals/AdminBoolean";
@@ -13,28 +13,41 @@ import Clock from './components/Clock.js';
 import CreateRest from './components/CreateRestaurant.js';
 import CheckOrder from './components/CheckOrder.js';
 
-//const React = require('react'); 
-const ReactDOM = require('react-dom'); 
 const axios = require('axios').default;
 
-//var adminBoolean = import("./globals/AdminBoolean.js")
-// works somewhat, but is a promise
+// TODO :
+// Create admin account / edit current user's adminAccount field in DB -button
+// Clean up CheckOrder.js (onClick function for rendering)
+// Generally clean up code that isn't used
+// RestaurantType render
 
 
-// TODO:
-// order history
+
+// TODO (optional) :
+// Menu item categories (frontend + backend + db editing needed)
+
+// Menu item pictures (frontend + lots of backend (restaurant specific folder, restaurant menu specific folder,
+// match + rename uploaded & imported pictures(!) between frontend / backend). If we want menu images it must be done with a
+// jpg/png array, which also needs lots of frontend & backend work)
+
+// This version Heroku commit deadline 18.00 - 9/12
+
+
+
+// Try to do some optional TODO stuff after pushing this to Heroku
+// If you get for an example menu item categories working,
+// Push that version to Heroku before actual project deadline (23.59 - 12/12)
+
 
 var globalDBArray = []; // global array for DB restaurants
 
 function handleRestaurants(response) {
   var res = response;
-  console.log("handleRestaurants() is pushing data to globalDBArray");
-
   var dbArray = [];
 
   for(var i = 0; i < res.data.length; i++) {
 
-    var globalDBObject = {idRestaurant: 0, name: "", operatingHours: "", address: "", priceLevel: 0, foods: "", foodsPrices: ""};
+    var globalDBObject = {idRestaurant: 0, name: "", operatingHours: "", address: "", restaurantType: "", priceLevel: 0, foods: "", foodsPrices: ""};
     // this gets pushed to globalDBArray
     // we are pushing an object because we can name the fields for rendering purposes
 
@@ -42,6 +55,7 @@ function handleRestaurants(response) {
     globalDBObject.name = res.data[i].Name;
     globalDBObject.operatingHours = res.data[i].OperatingHours;
     globalDBObject.address = res.data[i].Address;
+    globalDBObject.restaurantType = res.data[i].RestaurantType;
     globalDBObject.priceLevel = res.data[i].PriceLevel;
     globalDBObject.foods = res.data[i].Foods;
     globalDBObject.foodsPrices = res.data[i].FoodsPrices; // loop through response, add to object fields
@@ -64,7 +78,8 @@ class Prototype extends React.Component {
       loggedIn: false,
      };
   }
-  updateAdminState = () => {
+
+  updateLoginState = () => {
     let adminBoolean = adminCheck();
     this.setState({ adminAccount: adminBoolean});
     this.setState({ loggedIn: true });
@@ -88,7 +103,6 @@ class Prototype extends React.Component {
     })
 
     this.setState({ data: globalDBArray });
-    console.log("Restaurant state data: ", this.state.data);
   }
 
   render() {
@@ -116,7 +130,7 @@ class Prototype extends React.Component {
               {/* Depending on route, renders that component */}
               <Route path="/:restaurantId" element={ <MenuDB restaurants={ dbRestaurants } cartData={ this.state.cartData }/> } />
               <Route path="/" element={ <ShopListDB restaurants ={ dbRestaurants.filter((restaurant) => restaurant.name.toLowerCase().includes(this.state.SearchString))} /> } />
-              <Route path="/login" element={ <Login adminData={ this.state.adminAccount } updateAdminState={this.updateAdminState} /> } />
+              <Route path="/login" element={ <Login adminData={ this.state.adminAccount } updateLoginState={this.updateLoginState} /> } />
               <Route path="/checkout" element={ <Cart cartData={ this.state.cartData } /> } />
               <Route path="/payment" element={ <Payment />} />
               <Route path="/delivery" element={ <Clock />} />
@@ -144,7 +158,7 @@ class Prototype extends React.Component {
               {/* Depending on route, renders that component */}
               <Route path="/:restaurantId" element={ <MenuDB restaurants={ dbRestaurants } cartData={ this.state.cartData }/> } />
               <Route path="/" element={ <ShopListDB restaurants ={ dbRestaurants.filter((restaurant) => restaurant.name.toLowerCase().includes(this.state.SearchString))} /> } />
-              <Route path="/login" element={ <Login adminData={ this.state.adminAccount } updateAdminState={this.updateAdminState} /> } />
+              <Route path="/login" element={ <Login adminData={ this.state.adminAccount } updateLoginState={this.updateLoginState} /> } />
               <Route path="/checkout" element={ <Cart cartData={ this.state.cartData } /> } />
               <Route path="/payment" element={ <Payment />} />
               <Route path="/delivery" element={ <Clock />} />

@@ -42,7 +42,7 @@ function Login(props) {
       console.log(response.data);
       console.log("User id: ", sessionStorage.getItem('idUser'));
       navigate('/');
-      props.updateAdminState();
+      props.updateLoginState();
     })
 
     .catch(function (error) {
