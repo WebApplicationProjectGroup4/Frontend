@@ -92,7 +92,7 @@ class Prototype extends React.Component {
 
   async componentDidMount() {
 
-    await axios.get('/restaurants')
+    await axios.get('https://awagroup4project.herokuapp.com/restaurants')
 
     .then(function (response) {
       handleRestaurants(response);

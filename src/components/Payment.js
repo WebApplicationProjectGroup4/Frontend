@@ -18,7 +18,7 @@ function Payment(props) {
       let idUser = sessionStorage.getItem('idUser');
       let idRestaurant = sessionStorage.getItem('idRestaurant');
 
-      axios.post('http://localhost:3001/orderhistory', {
+      axios.post('https://awagroup4project.herokuapp.com/orderhistory', {
         orderedItems: menuItems, 
         price: totalPrice,
         idUser: idUser,

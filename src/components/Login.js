@@ -26,7 +26,7 @@ function Login(props) {
 
   function login(username, password) {
 
-    axios.get('http://localhost:3001/login', {
+    axios.get('https://awagroup4project.herokuapp.com/login', {
       auth: {
         username: username,
         password: password
@@ -69,7 +69,7 @@ function Login(props) {
     
   function createAccount(username, password, adminValue) {
 
-    axios.post('http://localhost:3001/users', { //Create account 
+    axios.post('https://awagroup4project.herokuapp.com/users', { //Create account 
       name: username,
       password: password,
       adminAccount: adminValue
