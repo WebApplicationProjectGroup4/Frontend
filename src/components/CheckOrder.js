@@ -9,14 +9,22 @@ var orderArray = [];
 
 const handleRestaurantNames = res => {
 
-  for (var i = 0; i < orderArray.length; i++) {
+  for (var i = 0; i <= orderArray.length; i++) {
 
-    var currentID;
-      currentID = orderArray[i].idRestaurant;
+    //var currentID;
+    var currentID = orderArray[i].idRestaurant;
+    console.log("Current id:" , currentID)
 
     for (var x = 0; x < res.data.length; x++) {
-      if (currentID === res.data[x].idRestaurant) 
-        orderArray[x].restaurantName = res.data[x].Name;
+
+      if (x+1 !== res.data.length) {
+
+        if (currentID === res.data[x].idRestaurant) {
+          console.log("Match found!", currentID, res.data[x].idRestaurant)
+          console.log(orderArray[x]);
+          orderArray[x].restaurantName = res.data[x].Name;
+        }
+      }
     }
   }
 }

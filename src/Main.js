@@ -80,7 +80,6 @@ class Prototype extends React.Component {
   }
 
   updateLoginState = () => {
-    sessionStorage.clear();
     this.setState({ adminAccount: adminCheck()});
     this.setState({ loggedIn: true });
     this.setState({ cartData: []});

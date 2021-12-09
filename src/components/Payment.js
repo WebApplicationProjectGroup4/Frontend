@@ -10,13 +10,17 @@ function Payment(props) {
   const phone = UserInput('');
   const address = UserInput('');
 
-  function Confirm() {
+  function Confirm(){
     if (card.value, fullname.value, phone.value, address.value !== ''){ 
 
-      let menuItems = sessionStorage.getItem('menuItems');
+      console.log("Delivery location: " + address.value)
+      let menuItems = sessionStorage.getItem('menuItems')
       let totalPrice = sessionStorage.getItem('totalPrice');
       let idUser = sessionStorage.getItem('idUser');
       let idRestaurant = sessionStorage.getItem('idRestaurant');
+
+      console.log('Ordered items: ', menuItems, 'Total price: ', totalPrice,
+      'user ID: ', idUser, 'restaurant ID: ', idRestaurant);
 
       axios.post('http://localhost:3001/orderhistory', {
         orderedItems: menuItems, 
@@ -33,7 +37,34 @@ function Payment(props) {
     }
     else console.log("The entries can not be empty!");      
   } 
- 
+ if (card.value, fullname.value, phone.value, address.value !== ''){ 
+  return (
+    <div className="Login">
+      <div className="Title">Please give your payment information to continue. </div>
+
+      <div className="Details"> Credit card info<br />
+        <input type="text" {...card} />
+      </div>
+
+      <div className="Details"> Full name<br />
+        <input type="text" {...fullname} />
+      </div>
+
+      <div className="Details"> Phone number<br />
+        <input type="text" {...phone} />
+      </div>
+
+      <div className="Details"> Address<br />
+        <input type="text" {...address} />
+      </div>
+
+      <div>Delivery location: {address.value}</div>
+    
+      <Link to="/delivery" ><input className="Button" type="button" value={'Confirm'} onClick={Confirm}/><br /> </Link>
+    </div>
+  );
+ }
+ else
  return (
   <div className="Login">
     <div className="Title">Please give your payment information to continue. </div>
