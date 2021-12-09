@@ -34,13 +34,18 @@ function Login(props) {
     })
     .then(function (response) {
 
-      console.log("AdminCheck with res parameter: ", adminCheck(response));
-      console.log("AdminCheck without res parameter: ", adminCheck());
+      adminCheck(response);
 
-      sessionStorage.setItem('idUser', response.data.charAt(response.data.length-1));
+      if (!isNaN(response.data.length-2)) { // if 2nd last number is a number
+        let idUser = ""; // build idUser string
+        idUser += response.data.charAt(response.data.length-2); // add 2nd last num
+        idUser += response.data.charAt(response.data.length-1); // add last num
+        sessionStorage.setItem('idUser', parseInt(idUser)); // parse int idUser string to sessionStorage
+      }
 
-      console.log(response.data);
-      console.log("User id: ", sessionStorage.getItem('idUser'));
+      console.log("Response data: ", response.data);
+      console.log("Session storage user id: ", sessionStorage.getItem('idUser'));
+      
       navigate('/');
       props.updateLoginState();
     })
