@@ -19,7 +19,7 @@ function Login(props) {
 
   const handleCreateAccount  = () => {
     if (username.value, password.value !== '') //checking if the textboxes are empty or not
-      createAccount(username.value, password.value);
+      createAccount(username.value, password.value, adminValue);
     else 
      console.log("The entries can not be empty")
   } 
@@ -50,12 +50,24 @@ function Login(props) {
     });
   }
 
-  function createAccount(username, password) {
+  const [adminValue, setAdminValue] = React.useState('')
+  const [checked, setChecked] = React.useState(false);
+  const handleCheckbox = () => {
+    setChecked(!checked);
+    if (checked === false) {
+      setAdminValue(1);
+    } else {
+      setAdminValue(0);
+    }
+  }
+  
+    
+  function createAccount(username, password, adminValue) {
 
     axios.post('http://localhost:3001/users', { //Create account 
       name: username,
       password: password,
-      adminAccount: 0 
+      adminAccount: adminValue
       })
   
     .then(function (response) {
@@ -81,6 +93,7 @@ function Login(props) {
 
       <div className="Title">New user? Sign up here</div>
       <input className="Button" type="button" value={'Create Account'} onClick={handleCreateAccount}/><br />
+      <div>Create admin account?<input type="checkbox" onChange={handleCheckbox}></input></div>
     </div>
       );
     }
