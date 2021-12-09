@@ -13,14 +13,10 @@ function Payment(props) {
   function Confirm(){
     if (card.value, fullname.value, phone.value, address.value !== ''){ 
 
-      console.log("Delivery location: " + address.value)
-      let menuItems = sessionStorage.getItem('menuItems')
+      let menuItems = sessionStorage.getItem('menuItems');
       let totalPrice = sessionStorage.getItem('totalPrice');
       let idUser = sessionStorage.getItem('idUser');
       let idRestaurant = sessionStorage.getItem('idRestaurant');
-
-      console.log('Ordered items: ', menuItems, 'Total price: ', totalPrice,
-      'user ID: ', idUser, 'restaurant ID: ', idRestaurant);
 
       axios.post('http://localhost:3001/orderhistory', {
         orderedItems: menuItems, 
@@ -29,7 +25,7 @@ function Payment(props) {
         idRestaurant: idRestaurant
       })
       .then(function (response) {
-        console.log(response);
+        console.log("POST OK");
       })
       .catch(function (error) {
         console.log("An error has occurred while trying to post order history.", error);
