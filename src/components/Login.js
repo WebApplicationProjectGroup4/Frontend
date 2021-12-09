@@ -50,7 +50,7 @@ function Login(props) {
     });
   }
 
-  const [adminValue, setAdminValue] = React.useState('')
+  const [adminValue, setAdminValue] = React.useState('0')
   const [checked, setChecked] = React.useState(false);
   const handleCheckbox = () => {
     setChecked(!checked);
