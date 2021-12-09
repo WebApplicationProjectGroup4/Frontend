@@ -68,6 +68,8 @@ export default class Cart extends React.Component {
         this.setState({ data: event.target.value });
     }
 
+    
+
     render() {
 
         var total = calculateTotal(this.state.data);

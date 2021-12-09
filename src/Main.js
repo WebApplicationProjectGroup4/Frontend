@@ -80,9 +80,10 @@ class Prototype extends React.Component {
   }
 
   updateLoginState = () => {
-    let adminBoolean = adminCheck();
-    this.setState({ adminAccount: adminBoolean});
+    sessionStorage.clear();
+    this.setState({ adminAccount: adminCheck()});
     this.setState({ loggedIn: true });
+    this.setState({ cartData: []});
   }
 
   onChange = (event) => {
@@ -132,7 +133,7 @@ class Prototype extends React.Component {
               <Route path="/" element={ <ShopListDB restaurants ={ dbRestaurants.filter((restaurant) => restaurant.name.toLowerCase().includes(this.state.SearchString))} /> } />
               <Route path="/login" element={ <Login adminData={ this.state.adminAccount } updateLoginState={this.updateLoginState} /> } />
               <Route path="/checkout" element={ <Cart cartData={ this.state.cartData } /> } />
-              <Route path="/payment" element={ <Payment />} />
+              <Route path="/payment" element={ <Payment /> } />
               <Route path="/delivery" element={ <Clock />} />
             </Routes>
             <Footer />
