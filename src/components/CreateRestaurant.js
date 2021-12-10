@@ -36,7 +36,7 @@ function CreateRestaurant() {
   function post(){
     
     // Post to backend restaurant that gets values from fields
-    axios.post('http://localhost:3001/restaurants', {
+    axios.post('https://awagroup4project.herokuapp.com/restaurants', {
       name: RestaurantName.value,
       priceLevel: PriceLevel.value,
       address: Address.value,
@@ -55,7 +55,7 @@ function CreateRestaurant() {
     formData.append('img', selectedFile);
     formData.append('text', RestaurantName.value);
 
-    axios.post('http://localhost:3001/upload', formData)
+    axios.post('https://awagroup4project.herokuapp.com/upload', formData)
 
     .then(function (response) {
       console.log(response.data);

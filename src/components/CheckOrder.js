@@ -17,9 +17,6 @@ const handleRestaurantNames = res => {
 
       if (currentID === res.data[increment].idRestaurant)
         orderArray[i].restaurantName = res.data[increment].Name;
-
-      else if (i+1 === res.data.length)
-        console.log("i+1 is res.data.length: ", res.data.length);
     }
   }
 }
@@ -48,7 +45,6 @@ function UpdateOrder(response) {
   }
 
   orderArray = dbArray;
-  //console.log(orderArray);
 } 
 
 class CheckOrder extends React.Component {
@@ -60,7 +56,7 @@ class CheckOrder extends React.Component {
 
   async componentDidMount(){
 
-    await axios.get('http://localhost:3001/orderhistory')
+    await axios.get('https://awagroup4project.herokuapp.com/orderhistory')
     
     .then(function (response) {
       UpdateOrder(response);
@@ -70,7 +66,7 @@ class CheckOrder extends React.Component {
       console.log(error);
     })
 
-    await axios.get('/restaurants')
+    await axios.get('https://awagroup4project.herokuapp.com/restaurants')
 
     .then(function (response) {
       handleRestaurantNames(response);

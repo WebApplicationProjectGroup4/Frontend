@@ -5,7 +5,7 @@ var savedAdmin = false;
 const adminCheck = response => {
 
     if (response) {
-        const admin = (response.data.includes("admin")); // we check if res contains admin
+        const admin = (response.data.includes("ADM")); // we check if res contains admin
       
         if (admin === true) { // if it does
             savedAdmin = true; // we save it to the var as true to be used later

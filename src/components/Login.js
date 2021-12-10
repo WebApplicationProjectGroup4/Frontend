@@ -36,12 +36,11 @@ function Login(props) {
 
       adminCheck(response);
 
-      if (!isNaN(response.data.length-2)) { // if 2nd last number is a number
-        let idUser = ""; // build idUser string
-        idUser += response.data.charAt(response.data.length-2); // add 2nd last num
-        idUser += response.data.charAt(response.data.length-1); // add last num
-        sessionStorage.setItem('idUser', parseInt(idUser)); // parse int idUser string to sessionStorage
-      }
+      const searchChar = '/'; // search the char /
+      const userIndex = response.data.indexOf(searchChar); // find index of T
+
+      let str = response.data.slice(userIndex+1);
+      sessionStorage.setItem("idUser", parseInt(str));
 
       console.log("Response data: ", response.data);
       console.log("Session storage user id: ", sessionStorage.getItem('idUser'));
