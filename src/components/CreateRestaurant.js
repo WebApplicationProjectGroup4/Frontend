@@ -5,7 +5,6 @@ import styles from '../styles/CreateRestaurant.module.css';
 function CreateRestaurant() {
 
   const [selectedFile, setSelectedFile] = useState();
-	const [isFilePicked, setIsFilePicked] = useState(false);
 
   const changeHandler = (event) => {
 		setSelectedFile(event.target.files[0]);
@@ -29,6 +28,7 @@ function CreateRestaurant() {
   const OperatingHours = UserInput('');
   const Address = UserInput('');
   const PriceLevel = UserInput('');
+  const RestaurantType = UserInput('');
   const Foods = UserInput('');
   const FoodsPrices = UserInput('');
 
@@ -39,6 +39,7 @@ function CreateRestaurant() {
     axios.post('https://awagroup4project.herokuapp.com/restaurants', {
       name: RestaurantName.value,
       priceLevel: PriceLevel.value,
+      restaurantType: RestaurantType.value,
       address: Address.value,
       operatingHours: OperatingHours.value,
       foods: Foods.value,
@@ -62,7 +63,7 @@ function CreateRestaurant() {
     })
     
     .catch(function (error) {
-      console.log("An error has occurred while trying to post a restaurant image.", error.response.data);
+      console.log("An error has occurred while trying to post a restaurant image.", error);
     });
   }
 
@@ -76,6 +77,7 @@ function CreateRestaurant() {
                     <div>Operating Hours<br /> <input type="text" {...OperatingHours} /></div>
                     <div>Address<br /> <input type="text" {...Address}/></div>
                     <div>Price Level<br /> <input type="number" min="1" max="5" {...PriceLevel}/></div>
+                    <div>Restaurant Type<br /> <input type="text" {...RestaurantType}/></div>
                     <div>Add your food, separate with - <br /> <input type="text"  {...Foods}/></div>
                     <div>Price matching the food, separate with -<br /> <input type="text"  {...FoodsPrices}/></div>
                     <div>Restaurant Image<br /> <input type="file" onChange={changeHandler}/></div>
