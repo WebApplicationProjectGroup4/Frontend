@@ -39,7 +39,7 @@ function Payment(props) {
       <div className="Title">Please give your payment information to continue. </div>
 
       <div className="Details"> Credit card info<br />
-        <input type="text" {...card} />
+        <input type="number" {...card} />
       </div>
 
       <div className="Details"> Full name<br />

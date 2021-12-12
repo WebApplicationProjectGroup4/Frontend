@@ -12,6 +12,7 @@ import Payment from './components/Payment.js';
 import Clock from './components/Clock.js';
 import CreateRest from './components/CreateRestaurant.js';
 import CheckOrder from './components/CheckOrder.js';
+import Help from './components/Help.js';
 
 const axios = require('axios').default;
 
@@ -99,7 +100,7 @@ class Prototype extends React.Component {
              <ul>
                <Link to="/" ><li>Home</li></Link>
                <li> <input class="searchBar" type="text" placeholder="Search..."  onChange={ this.onChange } /> </li>
-               <li> Help </li>
+               <Link to="/help" ><li>Help</li></Link>
                <li></li>
                <Link to="/login" ><button class="loginButton" > Login </button></Link>
             </ul>
@@ -112,6 +113,7 @@ class Prototype extends React.Component {
               <Route path="/checkout" element={ <Cart cartData={ this.state.cartData } /> } />
               <Route path="/payment" element={ <Payment /> } />
               <Route path="/delivery" element={ <Clock />} />
+              <Route path="/help" element={ <Help /> } />
             </Routes>
             <Footer />
         </BrowserRouter>
@@ -126,7 +128,7 @@ class Prototype extends React.Component {
              <ul>
                <Link to="/" ><li>Home</li></Link>
                <li> <input class="searchBar" type="text" placeholder="Search..."  onChange={ this.onChange } /> </li>
-               <li> Help </li>
+               <Link to="/help" ><li>Help</li></Link>
                <li></li>
                <Link to="/"> <button class="loginButton" onClick={() => this.setState({ loggedIn: false, adminAccount: false})} > Logout </button></Link>
                <Link to="/checkorder" ><button class="Button" > Order History </button></Link>
@@ -141,6 +143,7 @@ class Prototype extends React.Component {
               <Route path="/payment" element={ <Payment />} />
               <Route path="/delivery" element={ <Clock />} />
               <Route path="/checkorder" element={ <CheckOrder />} />
+              <Route path="/help" element={ <Help /> } />
             </Routes>
             <Footer />
         </BrowserRouter>
@@ -155,7 +158,7 @@ class Prototype extends React.Component {
              <ul>
               <Link to="/" ><li>Home</li></Link>
                <li> <input class="searchBar" type="text" placeholder="Search..."  onChange={ this.onChange } /> </li>
-               <li> Help </li>
+               <Link to="/help" ><li>Help</li></Link>
                <li></li>
                <Link to="/"> <button class="loginButton" onClick={() => this.setState({ loggedIn: false, adminAccount: false})} > Logout </button></Link>
                <Link to="/createrestaurant" ><button class="loginButton" > Create Restaurant </button></Link>
@@ -171,6 +174,7 @@ class Prototype extends React.Component {
               <Route path="/delivery" element={ <Clock />} />
               <Route path="/checkorder" element={ <CheckOrder />} />
               <Route path="/createrestaurant" element={ <CreateRest />} />
+              <Route path="/help" element={ <Help /> } />
             </Routes>
             <Footer />
         </BrowserRouter>

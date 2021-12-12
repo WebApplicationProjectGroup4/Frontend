@@ -32,10 +32,11 @@ function CreateRestaurant() {
   const Foods = UserInput('');
   const FoodsPrices = UserInput('');
 
-    
+  
   function post(){
     
     // Post to backend restaurant that gets values from fields
+    if (RestaurantName.value, PriceLevel.value, RestaurantType.value, Address.value, OperatingHours.value, Foods.value, FoodsPrices.value !== ''){
     axios.post('https://awagroup4project.herokuapp.com/restaurants', {
       name: RestaurantName.value,
       priceLevel: PriceLevel.value,
@@ -47,10 +48,12 @@ function CreateRestaurant() {
     })
     .then(function (response) {
       console.log(response.data);
+      alert("Created a new restaurant, refresh page to view it");
     })
     .catch(function (error) {
       console.log("An error has occurred while trying to post a restaurant.", error.response.data);
     });
+    
 
     const formData = new FormData();
     formData.append('img', selectedFile);
@@ -65,7 +68,10 @@ function CreateRestaurant() {
     .catch(function (error) {
       console.log("An error has occurred while trying to post a restaurant image.", error);
     });
+  } else {
+    alert("You have to fill every field");
   }
+}
 
   return(
         <div>
@@ -78,8 +84,8 @@ function CreateRestaurant() {
                     <div>Address<br /> <input type="text" {...Address}/></div>
                     <div>Price Level<br /> <input type="number" min="1" max="5" {...PriceLevel}/></div>
                     <div>Restaurant Type<br /> <input type="text" {...RestaurantType}/></div>
-                    <div>Add your food, separate with - <br /> <input type="text"  {...Foods}/></div>
-                    <div>Price matching the food, separate with -<br /> <input type="text"  {...FoodsPrices}/></div>
+                    <div>Add your food, separate with - (Example: Hamburger-Chicken wings) <br /> <input type="text"  {...Foods}/></div>
+                    <div>Price matching the food, separate with - (Example: 10-8)<br /> <input type="text"  {...FoodsPrices}/></div>
                     <div>Restaurant Image<br /> <input type="file" onChange={changeHandler}/></div>
                     <input type="button" value={'Add your restaurant'} onClick={post} />
                 </div> 

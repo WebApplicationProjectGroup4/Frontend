@@ -14,14 +14,14 @@ function Login(props) {
     if (username.value, password.value !== '') //checking if the textboxes are empty or not
       login(username.value, password.value);
     else 
-     console.log("The entries can not be empty")
+     alert("The entries can not be empty");
   } 
 
   const handleCreateAccount  = () => {
     if (username.value, password.value !== '') //checking if the textboxes are empty or not
       createAccount(username.value, password.value, adminValue);
     else 
-     console.log("The entries can not be empty")
+     alert("The entries can not be empty");
   } 
 
   function login(username, password) {
@@ -76,6 +76,9 @@ function Login(props) {
   
     .then(function (response) {
       console.log(response.data);
+      const nameTaken = (response.data === "this username is taken!");
+      if (nameTaken == true) 
+        alert("This username is taken!")
     })
     .catch(function (error) {
       console.log("An error has occurred while trying to create account.", error.response.data);
