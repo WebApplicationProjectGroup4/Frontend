@@ -65,7 +65,6 @@ class Prototype extends React.Component {
   }
 
   onChange = (event) => {
-    console.log(event.target.value);
     this.setState({SearchString: event.target.value});
   }
 

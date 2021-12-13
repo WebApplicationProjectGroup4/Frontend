@@ -1,72 +1,60 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const axios = require('axios').default;
 
 function Payment(props) {
-
+  let navigate = useNavigate();
   const card = UserInput('');
   const fullname = UserInput('');
   const phone = UserInput('');
   const address = UserInput('');
 
   function Confirm(){
-    if (card.value, fullname.value, phone.value, address.value !== ''){ 
+    if (card.value && fullname.value && phone.value && address.value !== ''){
 
       let menuItems = sessionStorage.getItem('menuItems');
       let totalPrice = sessionStorage.getItem('totalPrice');
       let idUser = sessionStorage.getItem('idUser');
       let idRestaurant = sessionStorage.getItem('idRestaurant');
+      const nameCheck = (fullname.value.includes(" "));
+      const addressCheck = (isNaN(parseInt(address.value)));
+      const idUserFound = (idUser !== null && idUser !== undefined);
 
-      axios.post('https://awagroup4project.herokuapp.com/orderhistory', {
-        orderedItems: menuItems, 
-        price: totalPrice,
-        idUser: idUser,
-        idRestaurant: idRestaurant
-      })
-      .then(function (response) {
-        console.log("POST OK");
-      })
-      .catch(function (error) {
-        console.log("An error has occurred while trying to post order history.", error);
-      })
+      if (!idUserFound) 
+        alert("You have to login first");
+
+      if (!nameCheck)
+        alert("Your full name is required ( name + surname )");
+
+      if (!addressCheck)
+        alert("Address cannot be just a number!");
+
+      if (nameCheck && addressCheck && idUserFound) {
+        axios.post('https://awagroup4project.herokuapp.com/orderhistory', {
+          orderedItems: menuItems, 
+          price: totalPrice,
+          idUser: idUser,
+          idRestaurant: idRestaurant
+        })
+        .then(function (response) {
+          console.log("POST OK");
+          navigate('/delivery');
+        })
+        .catch(function (error) {
+          console.log("An error has occurred while trying to post order history.", error);
+        })
+      } 
     }
-    else console.log("The entries can not be empty!");      
+    else alert("The entries can not be empty!");      
   } 
- if (card.value, fullname.value, phone.value, address.value !== ''){ 
-  return (
-    <div className="Login">
-      <div className="Title">Please give your payment information to continue. </div>
-
-      <div className="Details"> Credit card info<br />
-        <input type="number" {...card} />
-      </div>
-
-      <div className="Details"> Full name<br />
-        <input type="text" {...fullname} />
-      </div>
-
-      <div className="Details"> Phone number<br />
-        <input type="text" {...phone} />
-      </div>
-
-      <div className="Details"> Address<br />
-        <input type="text" {...address} />
-      </div>
-
-      <div>Delivery location: {address.value}</div>
-    
-      <Link to="/delivery" ><input className="Button" type="button" value={'Confirm'} onClick={Confirm}/><br /> </Link>
-    </div>
-  );
- }
- else
+ 
  return (
   <div className="Login">
     <div className="Title">Please give your payment information to continue. </div>
 
     <div className="Details"> Credit card info<br />
-      <input type="text" {...card} />
+      <input type="number" {...card} />
     </div>
 
     <div className="Details"> Full name<br />
@@ -74,7 +62,7 @@ function Payment(props) {
     </div>
 
     <div className="Details"> Phone number<br />
-      <input type="text" {...phone} />
+      <input type="number" {...phone} />
     </div>
 
     <div className="Details"> Address<br />
@@ -87,7 +75,6 @@ function Payment(props) {
   </div>
  );
 }
-
 const UserInput = initialValue => {
   const [value, setValue] = useState(initialValue);
   // Sets the value of what was written

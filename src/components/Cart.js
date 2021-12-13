@@ -49,7 +49,7 @@ const buildMenuString = data => {
     for (let i = 0; i < data.length; i++) {
         foodNameStr += data[i].foodName;
         if (i+1 === data.length)
-            console.log("MenuString is ready: ", foodNameStr);
+            continue;
         
         else foodNameStr += "-";
     }

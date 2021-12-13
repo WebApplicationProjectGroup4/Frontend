@@ -8,23 +8,20 @@ function Footer() {
                 <div className={styles.containerFooter}>
                 <div className={styles.row}>
                         <div className={styles.footer1}>
-                            <p>Company logo?</p>
-                            <p>Download app store</p>
+                            <p></p>
                         </div>
                         <div className={styles.footer2}>
                             <ul>
-                                <li>Get Help</li>
-                                <li>Sign up to deliver</li>
+                                <li></li>
                             </ul>
                         </div>
                         <div className={styles.footer3}>
                             <ul>
-                                <li>View all cities</li>
-                                <li>View all countries</li>
+                                <li></li>
                             </ul>
                         </div>
                     </div>
-                    <div className={styles.titleFooter}>©</div>
+                    <div className={styles.titleFooter}>© Advanced Web Applications project group 4</div>
               </div>
         </div>
         </footer>

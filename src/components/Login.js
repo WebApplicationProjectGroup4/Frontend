@@ -78,7 +78,9 @@ function Login(props) {
       console.log(response.data);
       const nameTaken = (response.data === "this username is taken!");
       if (nameTaken == true) 
-        alert("This username is taken!")
+        alert("This username is taken!");
+      else
+        alert("Account created successfully");
     })
     .catch(function (error) {
       console.log("An error has occurred while trying to create account.", error.response.data);

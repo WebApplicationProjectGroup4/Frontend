@@ -12,7 +12,6 @@ export default function Restaurants(props) {
   if(restaurant == null)
     return <div className={styles.container}>No matching restaurant found.</div>
   
-  console.log(restaurant);
   var menuArray = [];
 
   let food = ``; // build menu item
