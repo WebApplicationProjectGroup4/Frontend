@@ -1,0 +1,132 @@
+.vscode
+launch.json: Appears automatically when starting the app.
+
+
+/node_modules/
+
+This folder doesn’t need to be touched.
+The folder is created upon writing the npm install command, and it installs automatically all the modules and files it needs.
+This is in .gitignore because it takes space from github folder, so it is installed always locally before the server is set up.
+
+/styles/
+
+CSS stylings for all the components and pages.
+
+/components/
+
+All the important files and components in terms of functionality.
+
+Cart.js
+
+Component for the shopping cart. removeCartItem-function has a for loop,
+which searches the names of the products in the shopping cart.
+Upon finding them, the user may remove the products from the cart by pressing Remove button where this function is called(rows 82-85).
+calculateTotal function calculates the price of all the products in the carts. 
+In buildMenuString (starting at row 45) we search for the names of the products.
+foodNameStr equals the fields of the database.
+If any products have been added to the cart it is console.logged at row 52.
+We add a React Class for the cart component, where we update the cart data with setState.
+ 
+
+CheckOrder.js
+
+We make a global array to check the orders.
+HandleRestaurantNames- function (at row 10) goes through a for loop,
+when the function finds a restaurant it knows how to get the name by ID. 
+If the ID matches with the restaurant name it is pushed to the array.
+In UpdateOrder (row 24) we handle the order history posting to the site.
+If there are no previous orders, console.log gives an error. 
+In other case we get the data: global OrderObject array contains the information of the Order History database, 
+which are returned to the site later.
+
+We make an async axios get function for restaurant and order history tables.
+However we only want the restaurant name for the restaurant table.
+From orderHistory we get the price, date and ordered items. Finally, the data is rendered to the site.
+
+Clock.js
+
+In this function we handle the order status checking. 
+At rows 4-18 there is a countdown timer made in a React.Component (this.state.currentCount-1) and a text render which updates based on elapsed time (if-else condition).
+It updates in a way like order preparing -> order delivered -> delivery complete. 
+When the timer has reached value 1 and so is finished, 
+there appears a text “Delivery complete, enjoy your food!” and two buttons:
+the other one redirects you to the frontpage and the other one brings you to your order history where you can view your previous orders.
+
+CreateRestaurant.js
+
+We make a restaurant axios.post with the information we type in the text boxes(price, restaurant type, menu etc). 
+This functionality is only available to admin users. Every field must be filled in order to make a successful post.
+Rows 7-10: The handlers for setting the image of the restaurant.
+Rows 58-60: Handling the file and its name to present the name of the restaurant.
+
+Footer.js
+
+The text contents of the footer part of the page.
+
+Help.js
+
+This component just contains some tips and help for the users if they run into a problem.
+
+Login.js
+
+The login system. Includes two text boxes, username and password, with an if-check so the boxes won’t be left empty.
+When the username and password match the database, the login succeeds, and the user is redirected to the frontpage.
+Admin check is on rows 57-66.
+On rows 78-79 we check that the user doesn’t try to create an account with already existing username.
+If this happens, the application will throw an error.
+This Login.js file also includes the create account system, which happens simply by filling the same textboxes when logging in.
+After filling the boxes the user just presses Create Account-button.
+Optionally, they can choose if they want to create an admin account.
+
+Payment.js
+  
+The payment system. Includes text boxes with the same if-check: they can’t be left empty. 
+There are some other checks implemented in the boxes too: Full name- field must be filled with at least 2 words. 
+Credit card info and phone number fields do not accept letters - only number entries pass through.
+The user also must be logged in to the site in order to make the payment.
+When all the boxes are filled the right way, pressing Confirm button takes the user to the order status checking site. 
+The shopping cart data is brought here via sessionStorage. 
+
+RestaurantMenuDB.js
+
+The menu component for the restaurants.
+
+function const Result = useParams();  at line 9
+Searching restaurants based on ID – if they match, the restaurant opens, if not, gives error.
+The for loop below goes through the menu of the database. 
+In our database we have separated the products with lines such as Chili-Cheese-Mozzarella. 
+When a line is found, we make a split and a product is added to the menu. 
+The prices in the database and their line-separating works with same logic.
+Also, the price field in our database is a varchar, but this function converts it to an integer with parseInt.
+
+
+ShopListDB.js
+
+This component brings the restaurant info boxes to the front page with information and pictures given from the props. 
+Linking a restaurant ID to the function so we can check the products by pressing the restaurant info box in the front page.
+
+/globals/
+
+AdminBoolean.js
+
+The var savedAdmin = false of row 1 is used when we call this function without a parameter to get the last user or admin who goes through this function.
+
+We make an if check for the admin. If we find admin data from response.data upon logging in, it is saved to the var and true is returned.
+
+/Main.js/
+
+Rows 1-15: importing whatever we need in the application.
+
+Row 17: using axios for getting the restaurants.
+
+On rows 19-45 we make a similar restaurant search with global objects from database as we searched orderHistory from CheckOrder.js.
+
+Row 49 -> Using React class “Prototype”. The constructor contains the variables we are updating with setState.
+
+Rows 61-64: Updating the login status based on if the user is logged in or not.
+
+Rows 72-85: Async axios.get for getting the restaurants.
+
+Rows 95-184: The routes and links we need for all the different UIs and windows. 
+Includes also an if-check where we check if the user is logged in and if the user is logged in with an admin account. 
+If the user is logged in with an admin account, there is a new button rendered to the front page called “Create Restaurant” which brings you to the Create Restaurant UI.

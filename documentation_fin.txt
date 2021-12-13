@@ -1,0 +1,124 @@
+.vscode
+launch.json: Ilmestyy automaattisesti käynnistämisen yhteydessä.
+
+/node_modules/
+
+Tälle kansiolle ei tarvitse tehdä mitään.
+Kansio luodaan npm install komennolla, ja se asentaa automaattisesti kaikki tarvitsemansa moduulit ja tiedostot.
+Tämä on .gitignoressa koska vie tilaa github-kansiosta, joten se asennetaan aina paikallisesti ennen kuin palvelin pystytetään.
+
+/components/
+
+Tässä kansiossa on kaikki toiminnallisuuden kannalta tärkeät tiedostot.
+
+Cart.js
+
+Tämä komponentti on ostoskorille. removeCartItem-funktiossa on for-looppi joka etsii ostoskorissa olevien tuotteiden nimiä. 
+Kun ne löydetään, halutessaan tuotteet voi poistaa Remove- nappia painamalla missä kutsutaan tätä funktiota (rivit 82-85).
+Rivillä 24 alkavassa calculateTotal-funktiossa haetaan forEachilla tuotteiden tiedot jonka jälkeen tuotteiden hinnat lasketaan yhteen. 
+buildMenuStringissä (alkaa riviltä 45) etsitään tuotteiden nimet,
+foodNameStr on sama kuin tietokannassa oleva tieto ja kun ostoskoriin lisätään tuotteita se console.logataan rivillä 52.
+Cartille tehdään vielä react-luokka, jossa päivitetään ostoskorin tietoja setStatella.
+
+CheckOrder.js
+
+Tehdään globaali array tilauksien tarkastelua varten.
+HandleRestaurantNames-funktio (rivillä 10) käy for loopin läpi, kun funktio löytää ravintolan se osaa hakea sen nimen ID:n perusteella. 
+Jos ID käy yhteen ravintolan nimen kanssa, se pusketaan arrayhyn.
+UpdateOrderissa (rivi 24) käsitellään tilaushistorian postaaminen sivulle. 
+Jos tilauksia ei ole, console.logiin tulee virheilmoitus.
+Muussa tapauksessa palautetaan tiedot: globaali OrderObject-taulukko sisältää OrderHistory-tietokannan tietoja, 
+price, date, idRestaurant ja orderedItems, jotka pusketaan arrayhyn rivillä 43. 
+
+Tehdään asyncillä axios get restaurantille ja orderHistorylle. 
+Restaurant taulukosta tulostetaan sivulle kuitenkin vain ravintolan nimi ja orderhistorystä hinta, päivämäärä ja tilattu tuote.
+Lopuksi tiedot renderöidään sivulle.
+
+Clock.js
+
+Tässä tiedostossa käsitellään tilauksen seurantaa.
+Riveillä 4-18 on React.Component ja sillä tehty countdown ajastin (this.state.currentCount-1)
+ja tekstirender joka vaihtuu kuluneen ajan mukaan (if-else).
+Kun ajastin on saavuttanut arvon 1 eli päässyt loppuun asti, sivulle ilmestyy kaksi nappia:
+toisesta pääsee takaisin etusivulle ja toisesta pääsee ikkunaan missä pääsee katselemaan vanhoja tilauksia.
+
+CreateRestaurant.js
+
+Tehdään ravintolapostaus tekstikenttien tiedoilla (restaurant name, type, operatinghours, pricelevel, foods, prices..)
+Kaikki mitä tekstikenttiin kirjoitetaan, viedään tietokantaan. Tämä toiminto on saatavilla vain admin-käyttäjälle.
+Rivit 7-10: Handlerit ravintolan kuvan asettamiselle. 
+rivit 58-60: Käsitellään tiedosto ja sen nimi vastaamaan ravintolan nimeä.
+
+Footer.js
+
+Sivun alaosan tekstit. 
+
+Help.js
+
+Tässä komponentissa on ohjeet ongelmatilanteisiin, jos käyttäjä niitä kohtaa.
+
+Login.js
+
+Kirjautumissysteemi. Sisältää kaksi tekstikenttää, username ja password, joissa samanlainen if-tarkistus etteivät kentät jää täyttämättä.
+Kun salasana ja käyttäjänimi täsmäävät tietokannan tietoihin, kirjautuminen menee läpi ja käyttäjä ohjataan etusivulle.
+Admin tarkistus löytyy riveiltä 57-66.
+Riveillä 78-79 tarkistetaan, ettei yritetä luoda käyttäjää jo olemassa olevalla nimellä. Jos näin tapahtuu, sovellus antaa errorin.
+Tähän tiedostoon on myös sisällytetty uuden käyttäjän tekeminen, mikä tapahtuu täyttämällä samat tiedot kun kirjautuessa.
+Tiedot täytettyään käyttäjä painaa Create Account-nappia. Käyttäjä voi valita haluaako tehdä admin-käyttäjän.
+
+Payment.js
+  
+Maksusysteemi. Sisältää tekstikenttiä, joissa if-tarkistus – eivät saa olla tyhjiä.
+Tekstikentissä myös muitakin tarkistuksia – Fullname-kenttään ei voi laittaa vain yhtä sanaa tai nimeä,
+vaan pitää laittaa koko nimi. Credit card info ja phone number- kentät eivät hyväksy kirjaimia,
+ainoastaan numerot menee läpi. Lisäksi jos käyttäjä ei ole kirjautunut, maksu ei mene läpi.
+Sivulla ikkunaan viedään sessionStoragella ostoskorin tiedot. Kun tekstikentät on täytetty,
+nappia painamalla pääsee seuraamaan tilauksen kulkua.
+
+RestaurantMenuDB.js
+
+Etusivulla olevien ravintoloiden valikkokomponentti.
+
+funktio const Result = useParams();
+Etsitään ravintoloita ID:n perusteella, jos ne täsmäävät, ravintola aukeaa ja jos eivät niin heittää errorin. 
+
+Alempana oleva for-looppi käsittelee menua. Tietokannassamme on tuotteet eroteltu viivoilla.
+Loopataan menu läpi - kun viiva löydetään, tehdään splitti ja tuote lisätään menuun.
+Hinnat tietokannoissa ja niiden erottelu toimii samalla periaatteella.
+Lisäksi hinta on tietokannassa varchar, mutta funktio muuttaa sen numeroksi parseIntillä.
+
+ShopListDB.js
+
+Tämä komponentti luo ravintolalaatikot etusivulle propseista saatujen tietojen ja kuvien perusteella. 
+Linkataan tietyn ravintolan ID, jotta tuotteita päästään tarkastelemaan etusivulta ravintolan laatikkoa painamalla.
+
+/globals/
+
+AdminBoolean.js
+
+Ensimmäisen rivin var savedAdmin = false; käytetään kutsuessa tämä funktio ilman parametrejä. 
+aadaan viimeinen admin tai käyttäjä, joka menee tämän funktion läpi.
+
+Tehdään if-tarkistus adminille. Jos kirjautuessa response.datasta löytyy admin-tietoja, se tallennetaan savedAdminiin ja palautetaan true.
+
+/styles/
+
+CSS tyylittelyt kaikille sivuille.
+
+/Main.js/
+
+Rivit 1-15: importataan kaikki mitä tarvitaan.
+
+17. rivillä otetaan axios käyttöön ravintoloiden hakua varten.
+
+Riveillä 19-45 tehdään samanlainen ravintolahaku globaaleilla objekteilla tietokannasta kuin CheckOrder.js:ssä tehtiin orderHistorylle.
+
+Rivi 49 -> Prototype react class otetaan käyttöön. Konstruktorissa tarvittavat muuttujat, mitä päivitellään.
+
+Rivi 61-64: Kirjautumisstatus päivittyy sen mukaan, onko käyttäjä kirjautunut vai ei.
+
+Rivi 71-84: Asyncillä tahdistettu axios-funktio ravintoloiden hakemiselle.
+
+Rivit 94-183: Tarvittavat routet ja linkit eri ikkunoihin.
+Sisältää myös if-tarkistuksen jossa tarkistetaan onko käyttäjä kirjautunut sisään ja onko sisään kirjauduttu adminina,
+jos on niin etusivulle renderöidään uusi nappi ”Create Restaurant” mistä pääsee luomaan ravintoloita.
